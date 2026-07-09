@@ -1,0 +1,226 @@
+<title>Secondhand AI — Design Overview</title>
+<style>
+  :root {
+    --ground:#EFF1EF; --panel:#FBFBFA; --ink:#1E211F; --ink-soft:#585C58;
+    --hair:#D7D9D3; --hair-strong:#B9BCB4; --accent:#3E6663;
+    --radius:14px; --maxw:1180px;
+    --mono:ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){ :root{ --ground:#17191A; --panel:#1F2223; --ink:#ECEEEB; --ink-soft:#9CA09A; --hair:#2C302E; --hair-strong:#3D423F; --accent:#7FB0AB; } }
+  :root[data-theme="light"]{ --ground:#EFF1EF; --panel:#FBFBFA; --ink:#1E211F; --ink-soft:#585C58; --hair:#D7D9D3; --hair-strong:#B9BCB4; --accent:#3E6663; }
+  :root[data-theme="dark"]{ --ground:#17191A; --panel:#1F2223; --ink:#ECEEEB; --ink-soft:#9CA09A; --hair:#2C302E; --hair-strong:#3D423F; --accent:#7FB0AB; }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--ground); color:var(--ink); font-family:var(--sans); line-height:1.65; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:var(--maxw); margin:0 auto; padding:clamp(30px,6vw,80px) clamp(18px,5vw,44px); }
+
+  .overline { font-family:var(--mono); font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent); margin:0 0 16px; }
+  h1 { font-size:clamp(32px,6vw,58px); line-height:1.02; letter-spacing:-0.035em; font-weight:800; margin:0 0 8px; text-wrap:balance; }
+  .subtitle { font-size:clamp(17px,2.2vw,22px); color:var(--ink-soft); font-weight:500; margin:0 0 26px; }
+  .intro { font-size:clamp(15.5px,1.8vw,17.5px); color:var(--ink); max-width:70ch; margin:0 0 14px; }
+  .intro.soft { color:var(--ink-soft); }
+  .intro b { font-weight:650; }
+
+  .rule { border:none; border-top:1px solid var(--hair); margin:clamp(34px,6vw,56px) 0; }
+
+  h2.sec { font-size:clamp(21px,3vw,30px); font-weight:800; letter-spacing:-0.02em; margin:0 0 6px; }
+  .sec-lead { color:var(--ink-soft); font-size:15px; margin:0 0 22px; max-width:76ch; }
+
+  /* palette */
+  .palette { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+  @media (min-width:560px){ .palette { grid-template-columns:repeat(4,1fr); } }
+  .sw { border:1px solid var(--hair); border-radius:10px; overflow:hidden; background:var(--panel); }
+  .sw .chip { height:52px; }
+  .sw .meta { padding:8px 10px; }
+  .sw .name { font-size:12px; font-weight:700; color:var(--ink); }
+  .sw .hex { font-family:var(--mono); font-size:10.5px; color:var(--ink-soft); }
+  .sw .role { font-size:10.5px; color:var(--ink-soft); }
+
+  .rules3 { display:grid; grid-template-columns:1fr; gap:12px; margin-top:16px; }
+  @media (min-width:720px){ .rules3 { grid-template-columns:repeat(3,1fr); } }
+  .r3 { border:1px solid var(--hair); border-radius:10px; background:var(--panel); padding:14px 16px; }
+  .r3 .k { font-size:13px; font-weight:700; color:var(--ink); margin-bottom:2px; }
+  .r3 .k .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:6px; vertical-align:baseline; }
+  .r3 .v { font-size:12.5px; color:var(--ink-soft); }
+
+  /* page showcase */
+  .pageblock { display:grid; grid-template-columns:1fr; gap:20px; margin-bottom:26px; align-items:center; }
+  @media (min-width:760px){ .pageblock { grid-template-columns:300px 1fr; gap:32px; } .pageblock.flip { grid-template-columns:1fr 300px; } .pageblock.flip .txt { order:-1; } }
+  .pageblock .txt h3 { font-size:19px; font-weight:800; letter-spacing:-0.01em; margin:0 0 4px; }
+  .pageblock .txt .tagline { font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); margin:0 0 10px; }
+  .pageblock .txt p { font-size:14.5px; color:var(--ink-soft); margin:0; max-width:60ch; }
+  .pageblock .txt p b { color:var(--ink); }
+
+  .grid4 { display:grid; grid-template-columns:1fr; gap:20px; }
+  @media (min-width:560px){ .grid4 { grid-template-columns:1fr 1fr; } }
+  @media (min-width:980px){ .grid4 { grid-template-columns:repeat(4,1fr); } }
+  .rp-item .cap { margin:0 0 8px; }
+  .rp-item .cap b { color:var(--ink); font-weight:700; font-size:13px; }
+  .trio { display:flex; gap:4px; margin:0 0 8px; }
+  .trio i { width:22px; height:14px; border-radius:3px; border:1px solid rgba(0,0,0,.14); }
+  @media (prefers-color-scheme: dark){ .trio i { border-color:rgba(255,255,255,.16);} }
+
+  /* frames */
+  .pg { border:1px solid var(--hair-strong); border-radius:11px; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 8px 30px rgba(30,33,31,.07); }
+  .idx { height:340px; } .ov { height:340px; } .ex { height:340px; } .rp { height:440px; }
+  .pg .sec { padding:11px 13px; }
+  .pg .grow { flex:1; }
+  .band { flex:1; display:flex; flex-direction:column; justify-content:center; padding:9px 13px; }
+  .wm { font-weight:800; letter-spacing:-0.03em; text-transform:uppercase; line-height:0.9; }
+  .eb { font-family:var(--mono); font-size:6.5px; letter-spacing:0.2em; text-transform:uppercase; }
+  .bar { width:24px; border-radius:2px; }
+  .row { display:flex; align-items:center; gap:6px; }
+  .mini-t { font-size:8.5px; font-weight:700; letter-spacing:-.01em; }
+  .mini-s { font-size:6.8px; line-height:1.4; }
+  .rlabel { font-size:7.5px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; }
+
+  footer.f { margin-top:clamp(34px,6vw,56px); padding-top:22px; border-top:1px solid var(--hair); color:var(--ink-soft); font-size:13px; }
+  footer.f b { color:var(--ink); }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="overline">Secondhand AI · visual design · for review</p>
+    <h1>Design overview</h1>
+    <p class="subtitle">Direction: <b style="color:var(--ink)">Ambient Haze</b> — teal accent, amber &amp; dust warmth.</p>
+    <p class="intro">Secondhand AI has effects that are <b>two-sided</b> (they can help and harm), often <b>invisible and hard to spot</b>, and carry real <b>urgency</b>. The palette expresses this without alarm: a clean neutral "clear air" that a warm amber haze gradually creeps across (the urgency, building rather than shouting), <b>teal</b> as the quiet recurring accent for the beneficial side, and colour kept restrained so the writing leads.</p>
+    <p class="intro soft">The existing page layouts are unchanged — this covers only how colour is applied across them.</p>
+  </header>
+
+  <hr class="rule">
+
+  <!-- PALETTE -->
+  <h2 class="sec">The palette</h2>
+  <p class="sec-lead">One family: a neutral ground, a single dark, teal for accents, and amber/dust for warmth.</p>
+  <div class="palette">
+    <div class="sw"><div class="chip" style="background:#E9ECEA"></div><div class="meta"><div class="name">Clear air</div><div class="hex">#E9ECEA</div><div class="role">light ground</div></div></div>
+    <div class="sw"><div class="chip" style="background:#22252B"></div><div class="meta"><div class="name">Smoke</div><div class="hex">#22252B</div><div class="role">dark</div></div></div>
+    <div class="sw"><div class="chip" style="background:#5E8A86"></div><div class="meta"><div class="name">Teal</div><div class="hex">#5E8A86</div><div class="role">accent (site-wide)</div></div></div>
+    <div class="sw"><div class="chip" style="background:#3E6663"></div><div class="meta"><div class="name">Deep teal</div><div class="hex">#3E6663</div><div class="role">teal text / block</div></div></div>
+    <div class="sw"><div class="chip" style="background:#C4D6D2"></div><div class="meta"><div class="name">Pale teal</div><div class="hex">#C4D6D2</div><div class="role">tint</div></div></div>
+    <div class="sw"><div class="chip" style="background:#C25A2B"></div><div class="meta"><div class="name">Amber</div><div class="hex">#C25A2B</div><div class="role">heat / urgency</div></div></div>
+    <div class="sw"><div class="chip" style="background:#B79B6E"></div><div class="meta"><div class="name">Dust</div><div class="hex">#B79B6E</div><div class="role">warm haze</div></div></div>
+  </div>
+
+  <div class="rules3">
+    <div class="r3"><div class="k"><span class="dot" style="background:#5E8A86"></span>Teal is the accent</div><div class="v">Links, nav dots, arrows, chips and the "benefit" side — on every page.</div></div>
+    <div class="r3"><div class="k"><span class="dot" style="background:#C25A2B"></span>Amber &amp; dust are the warmth</div><div class="v">Amber carries heat and urgency; dust is the softer warm haze that ties the site together.</div></div>
+    <div class="r3"><div class="k"><span class="dot" style="background:#22252B"></span>Dark is used sparingly</div><div class="v">Smoke anchors a few key moments; most surfaces stay light and quiet.</div></div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- CORE PAGES -->
+  <h2 class="sec">The pages</h2>
+  <p class="sec-lead">Index, the overview explainer, and the real-life-examples gallery.</p>
+
+  <!-- INDEX -->
+  <div class="pageblock">
+    <div class="pg idx" style="background:#E9ECEA">
+      <div class="sec" style="text-align:center;padding:20px 13px 14px"><div class="eb" style="color:#3E6663">An explainer · index</div><div class="wm" style="font-size:24px;color:#22252B;margin-top:8px">Second<span style="color:#C25A2B">hand</span> AI</div></div>
+      <div class="sec" style="background:#C4D6D2"><div class="row"><span class="eb" style="color:#33453f">01</span><span class="mini-t" style="color:#22252B">The full story</span><span style="margin-left:auto;color:#3E6663">→</span></div></div>
+      <div class="sec" style="background:#E9ECEA"><div class="row" style="margin-bottom:5px"><span class="eb" style="color:#3E6663">02</span><span class="mini-t" style="color:#22252B">The research</span></div><div class="mini-s" style="color:#4a4e4a">Generative AI can harm learning →</div><div class="mini-s" style="color:#4a4e4a;margin-top:2px">AI "workslop" →</div></div>
+      <div class="sec grow" style="background:#E7DDC8"><div class="row"><span class="eb" style="color:#8a6b3e">03</span><span class="mini-t" style="color:#22252B">Real life examples</span><span style="margin-left:auto;color:#C25A2B">→</span></div></div>
+    </div>
+    <div class="txt">
+      <p class="tagline">Index</p>
+      <h3>Section colour, quiet</h3>
+      <p>The contents page. Each chapter block takes its own soft tint — <b>pale teal</b>, clear air, then <b>pale dust</b> — so the three routes are distinct but calm. Teal marks the links and arrows.</p>
+    </div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="pageblock flip">
+    <div class="pg ov" style="background:linear-gradient(#E9ECEA 0%,#E4DBC4 40%,#CE924E 74%,#C25A2B 100%)">
+      <div class="sec" style="text-align:center;padding:18px 13px"><div class="eb" style="color:#3E6663">An explainer</div><div class="wm" style="font-size:22px;color:#22252B;margin-top:6px">Second<span style="color:#C25A2B">hand</span> AI</div></div>
+      <div class="sec"><div class="eb" style="color:#3E6663;text-align:center">the anecdote — over the gradient</div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;margin-top:8px"><span style="width:11px;height:11px;border-radius:50%;background:#22252B"></span><span style="width:2px;height:10px;background:repeating-linear-gradient(#22252B 0 2px,transparent 2px 4px)"></span><span style="width:8px;height:10px;border-radius:2px;background:#fbfbfa;border:1px solid #22252B"></span><span style="width:2px;height:10px;background:repeating-linear-gradient(#22252B 0 2px,transparent 2px 4px)"></span><span style="width:11px;height:11px;border-radius:50%;background:rgba(34,37,43,.5)"></span></div></div>
+      <div class="sec"><div class="mini-t" style="color:#2c2f26;margin-bottom:4px">Three modes</div><div class="mini-s" style="color:#3a3320">overload · illusory · altered — <span style="color:#3E6663;font-weight:700">teal accents</span></div></div>
+      <div class="sec grow" style="display:flex;align-items:flex-end"><div class="mini-s" style="color:#fff;font-weight:600">"It changes how we read everyone."</div></div>
+    </div>
+    <div class="txt">
+      <p class="tagline">Overview · the explainer</p>
+      <h3>Clear → amber scroll gradient</h3>
+      <p>The long-scroll story. The background begins as clear air and <b>hazes into amber</b> as you move down — the urgency building physically as the argument deepens. Teal accents mark the beneficial side of each mode.</p>
+    </div>
+  </div>
+
+  <!-- EXAMPLES -->
+  <div class="pageblock">
+    <div class="pg ex" style="background:#E9ECEA">
+      <div class="sec" style="text-align:center;padding-top:16px"><div class="eb" style="color:#3E6663">Real life examples</div><div class="mini-t" style="font-size:11px;margin-top:5px;color:#22252B">Secondhand AI <span style="color:#C25A2B">in the wild</span></div></div>
+      <div class="sec grow" style="column-count:2;column-gap:8px">
+        <div style="break-inside:avoid;margin-bottom:8px;border:1px solid #cfd2ca;border-radius:6px;overflow:hidden;background:#fbfbfa"><div style="height:32px;background:#e2e6df"></div><div style="padding:6px"><div class="eb" style="color:#3E6663">X / Twitter</div><div class="mini-s" style="color:#22252B">A reply too clean</div></div></div>
+        <div style="break-inside:avoid;margin-bottom:8px;border:1px solid #cfd2ca;border-radius:6px;overflow:hidden;background:#fbfbfa"><div style="height:52px;background:#e2e6df"></div><div style="padding:6px"><div class="eb" style="color:#3E6663">News</div><div class="mini-s" style="color:#22252B">The email no one wrote</div></div></div>
+        <div style="break-inside:avoid;margin-bottom:8px;border:1px solid #cfd2ca;border-radius:6px;overflow:hidden;background:#fbfbfa"><div style="height:28px;background:#e2e6df"></div><div style="padding:6px"><div class="eb" style="color:#3E6663">Reddit</div><div class="mini-s" style="color:#22252B">"Is my note AI?"</div></div></div>
+        <div style="break-inside:avoid;margin-bottom:8px;border:1px solid #cfd2ca;border-radius:6px;overflow:hidden;background:#fbfbfa"><div style="height:40px;background:#e2e6df"></div><div style="padding:6px"><div class="eb" style="color:#C25A2B">Court</div><div class="mini-s" style="color:#22252B">Citations that don't exist</div></div></div>
+      </div>
+    </div>
+    <div class="txt">
+      <p class="tagline">Real life examples</p>
+      <h3>Neutral ground, colour in the words</h3>
+      <p>The gallery sits on the plain <b>clear-air</b> ground (#E9ECEA), keeping it calm and neutral. Colour lives in the type instead — <b>teal</b> source tags, with <b>amber</b> for the sharper cases — so the page stays quiet while the words carry the accent.</p>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- RESEARCH -->
+  <h2 class="sec">Research paper pages</h2>
+  <p class="sec-lead">Each study is built from exactly <b>three colours</b> — one dark, one light tint, one whiteish neutral — as full-width bands (Title · Summary · Procedure · Results · Key findings · Implications), text directly on the colour. The band order is identical across all four; only the three colours change, so a paper can carry a cooler or warmer identity while the pages stay a consistent family.</p>
+  <div class="grid4">
+    <!-- R1 -->
+    <div class="rp-item"><p class="cap"><b>1 · Umber · pale dust · warm white</b></p>
+      <div class="trio"><i style="background:#3A2E20"></i><i style="background:#E7DDC8"></i><i style="background:#F4EEE2"></i></div>
+      <div class="pg rp">
+        <div class="band" style="background:#3A2E20;text-align:center;flex:1.2"><div class="rlabel" style="color:#c9a06a">Title</div><div class="mini-t" style="color:#F4EEE2;margin-top:3px">AI can harm learning</div></div>
+        <div class="band" style="background:#F4EEE2"><div class="rlabel" style="color:#8a6b3e">Summary</div><div class="mini-s" style="color:#22252B;margin-top:2px">Higher with AI, worse without.</div></div>
+        <div class="band" style="background:#E7DDC8"><div class="rlabel" style="color:#6b5127">Procedure</div><div class="mini-s" style="color:#22252B;margin-top:2px">assign → practice → test</div></div>
+        <div class="band" style="background:#F4EEE2"><div class="rlabel" style="color:#8a6b3e">Results</div><div class="row" style="align-items:flex-end;gap:8px;margin-top:3px;height:26px"><div style="text-align:center"><div class="bar" style="height:22px;background:#3A2E20"></div><div class="eb" style="color:#22252B;margin-top:2px">+48</div></div><div style="text-align:center"><div class="bar" style="height:13px;background:#3A2E20"></div><div class="eb" style="color:#22252B;margin-top:2px">−17</div></div></div></div>
+        <div class="band" style="background:#E7DDC8"><div class="rlabel" style="color:#6b5127">Key findings</div><div class="mini-s" style="color:#22252B;margin-top:2px">Scores hid shallow grasp.</div></div>
+        <div class="band" style="background:#3A2E20;flex:1.2"><div class="rlabel" style="color:#c9a06a">Implications</div><div class="mini-s" style="color:#F4EEE2;margin-top:2px">The illusion travels onward.</div></div>
+      </div>
+    </div>
+    <!-- R2 -->
+    <div class="rp-item"><p class="cap"><b>2 · Terracotta · warm sand · cream</b></p>
+      <div class="trio"><i style="background:#7A3A1E"></i><i style="background:#E4D2AE"></i><i style="background:#F5EFE4"></i></div>
+      <div class="pg rp">
+        <div class="band" style="background:#7A3A1E;text-align:center;flex:1.2"><div class="rlabel" style="color:#eec2a4">Title</div><div class="mini-t" style="color:#F5EFE4;margin-top:3px">AI can harm learning</div></div>
+        <div class="band" style="background:#F5EFE4"><div class="rlabel" style="color:#8a4a24">Summary</div><div class="mini-s" style="color:#22252B;margin-top:2px">Higher with AI, worse without.</div></div>
+        <div class="band" style="background:#E4D2AE"><div class="rlabel" style="color:#6b5127">Procedure</div><div class="mini-s" style="color:#22252B;margin-top:2px">assign → practice → test</div></div>
+        <div class="band" style="background:#F5EFE4"><div class="rlabel" style="color:#8a4a24">Results</div><div class="row" style="align-items:flex-end;gap:8px;margin-top:3px;height:26px"><div style="text-align:center"><div class="bar" style="height:22px;background:#7A3A1E"></div><div class="eb" style="color:#22252B;margin-top:2px">+48</div></div><div style="text-align:center"><div class="bar" style="height:13px;background:#7A3A1E"></div><div class="eb" style="color:#22252B;margin-top:2px">−17</div></div></div></div>
+        <div class="band" style="background:#E4D2AE"><div class="rlabel" style="color:#6b5127">Key findings</div><div class="mini-s" style="color:#22252B;margin-top:2px">Scores hid shallow grasp.</div></div>
+        <div class="band" style="background:#7A3A1E;flex:1.2"><div class="rlabel" style="color:#eec2a4">Implications</div><div class="mini-s" style="color:#F5EFE4;margin-top:2px">The illusion travels onward.</div></div>
+      </div>
+    </div>
+    <!-- R3 -->
+    <div class="rp-item"><p class="cap"><b>3 · Smoke · warm sand · warm white</b></p>
+      <div class="trio"><i style="background:#22252B"></i><i style="background:#E4D2AE"></i><i style="background:#F4EEE2"></i></div>
+      <div class="pg rp">
+        <div class="band" style="background:#22252B;text-align:center;flex:1.2"><div class="rlabel" style="color:#c9a06a">Title</div><div class="mini-t" style="color:#F4EEE2;margin-top:3px">AI can harm learning</div></div>
+        <div class="band" style="background:#F4EEE2"><div class="rlabel" style="color:#8a6b3e">Summary</div><div class="mini-s" style="color:#22252B;margin-top:2px">Higher with AI, worse without.</div></div>
+        <div class="band" style="background:#E4D2AE"><div class="rlabel" style="color:#6b5127">Procedure</div><div class="mini-s" style="color:#22252B;margin-top:2px">assign → practice → test</div></div>
+        <div class="band" style="background:#F4EEE2"><div class="rlabel" style="color:#8a6b3e">Results</div><div class="row" style="align-items:flex-end;gap:8px;margin-top:3px;height:26px"><div style="text-align:center"><div class="bar" style="height:22px;background:#22252B"></div><div class="eb" style="color:#22252B;margin-top:2px">+48</div></div><div style="text-align:center"><div class="bar" style="height:13px;background:#22252B"></div><div class="eb" style="color:#22252B;margin-top:2px">−17</div></div></div></div>
+        <div class="band" style="background:#E4D2AE"><div class="rlabel" style="color:#6b5127">Key findings</div><div class="mini-s" style="color:#22252B;margin-top:2px">Scores hid shallow grasp.</div></div>
+        <div class="band" style="background:#22252B;flex:1.2"><div class="rlabel" style="color:#c9a06a">Implications</div><div class="mini-s" style="color:#F4EEE2;margin-top:2px">The illusion travels onward.</div></div>
+      </div>
+    </div>
+    <!-- R4 -->
+    <div class="rp-item"><p class="cap"><b>4 · Deep teal · pale dust · warm white</b></p>
+      <div class="trio"><i style="background:#3E6663"></i><i style="background:#E7DDC8"></i><i style="background:#F3F1EA"></i></div>
+      <div class="pg rp">
+        <div class="band" style="background:#3E6663;text-align:center;flex:1.2"><div class="rlabel" style="color:#bcdad5">Title</div><div class="mini-t" style="color:#F1F3F1;margin-top:3px">AI can harm learning</div></div>
+        <div class="band" style="background:#F3F1EA"><div class="rlabel" style="color:#3E6663">Summary</div><div class="mini-s" style="color:#22252B;margin-top:2px">Higher with AI, worse without.</div></div>
+        <div class="band" style="background:#E7DDC8"><div class="rlabel" style="color:#8a6b3e">Procedure</div><div class="mini-s" style="color:#22252B;margin-top:2px">assign → practice → test</div></div>
+        <div class="band" style="background:#F3F1EA"><div class="rlabel" style="color:#3E6663">Results</div><div class="row" style="align-items:flex-end;gap:8px;margin-top:3px;height:26px"><div style="text-align:center"><div class="bar" style="height:22px;background:#3E6663"></div><div class="eb" style="color:#22252B;margin-top:2px">+48</div></div><div style="text-align:center"><div class="bar" style="height:13px;background:#3E6663"></div><div class="eb" style="color:#22252B;margin-top:2px">−17</div></div></div></div>
+        <div class="band" style="background:#E7DDC8"><div class="rlabel" style="color:#8a6b3e">Key findings</div><div class="mini-s" style="color:#22252B;margin-top:2px">Scores hid shallow grasp.</div></div>
+        <div class="band" style="background:#3E6663;flex:1.2"><div class="rlabel" style="color:#bcdad5">Implications</div><div class="mini-s" style="color:#F1F3F1;margin-top:2px">The illusion travels onward.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="f">
+    <p><b>Note.</b> These are schematic colour previews — they show where each colour sits, not the final typography, spacing, section dividers, or illustration. Page layouts are unchanged from the current build; only the colour system is new.</p>
+  </footer>
+</div>

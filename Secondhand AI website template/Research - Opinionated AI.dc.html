@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Archivo:wght@400;500;600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0}
+body{color:#22252B;font-family:'Public Sans',system-ui,sans-serif;line-height:1.6}
+a{text-decoration:none}
+h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}body{font-kerning:normal}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}html{scroll-behavior:auto}}
+</style>
+</helmet>
+
+<a href="Landing.dc.html" style="position:fixed;top:22px;left:24px;z-index:20;font-family:'Public Sans',sans-serif;font-size:11px;letter-spacing:.06em;color:#F3F1EA;background:rgba(34,37,43,.5);padding:8px 14px;border-radius:100px;backdrop-filter:blur(4px)">← Back to index</a>
+
+<!-- contents rail -->
+<div style="position:fixed;top:50%;right:26px;transform:translateY(-50%);z-index:20;display:flex;flex-direction:column;gap:14px;align-items:flex-end">
+  <sc-for list="{{ toc }}" as="t" hint-placeholder-count="6">
+    <button type="button" onClick="{{ t.goTo }}" aria-label="{{ t.label }}" style="display:flex;align-items:center;gap:10px;cursor:pointer;opacity:{{ t.opacity }};transition:opacity .3s;background:none;border:none;padding:6px 2px;font:inherit;color:inherit">
+      <span style="font-family:'Public Sans',sans-serif;font-size:10.5px;letter-spacing:.05em;color:#8FB0AB;white-space:nowrap;transition:opacity .3s;opacity:{{ t.labelOpacity }}">{{ t.label }}</span>
+      <span style="width:{{ t.dotSize }};height:{{ t.dotSize }};border-radius:50%;background:#8FB0AB;flex:none;transition:width .3s,height .3s"></span>
+    </button>
+  </sc-for>
+</div>
+
+<div style="position:relative">
+
+
+  <!-- ===== 1. TITLE — PURPLE ===== -->
+  <section data-section="Title" style="min-height:80vh;background:#3E6663;display:flex;align-items:center;justify-content:center;padding:clamp(48px,7vw,72px) 24px;position:relative">
+    <div data-reveal style="max-width:720px;text-align:center;position:relative;z-index:1">
+      <div style="font-family:'Public Sans',sans-serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#BCDAD5;margin-bottom:26px">Research · CHI 2023</div>
+      <h1 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(30px,5vw,56px);line-height:1.1;letter-spacing:-.01em;margin:0;color:#F3F1EA">Co-writing with opinionated language models affects users’ views</h1>
+      <p style="font-size:16px;color:#E7DDC8;margin:16px 0 0">Jakesch · Bhat · Buschek · Zalmanson · Naaman</p>
+      <p style="font-family:'Public Sans',sans-serif;font-size:12px;color:#BCDAD5;margin:6px 0 0">Proceedings of CHI 2023, pages 1–15</p>
+      <div style="display:flex;gap:12px;justify-content:center;margin-top:22px;flex-wrap:wrap">
+        <a href="#" style="font-weight:600;font-size:14px;background:#22252B;color:#F3F1EA;padding:12px 24px;border-radius:100px" style-hover="background:#33453F">Read the full paper →</a>
+        <a href="#" style="font-weight:600;font-size:14px;color:#F3F1EA;background:rgba(244,238,226,.12);border:1px solid rgba(244,238,226,.4);padding:12px 24px;border-radius:100px">PDF</a>
+      </div>
+    </div>  </section>
+
+  <!-- ===== 2. SUMMARY / AIM / HYPOTHESIS — BLUE ===== -->
+  <section data-section="Summary" style="min-height:80vh;background:#F3F1EA;display:flex;align-items:center;justify-content:center;padding:clamp(48px,7vw,72px) 24px;position:relative">
+    <div data-reveal style="max-width:640px;text-align:center;position:relative;z-index:1">
+      <p style="font-family:'Public Sans',system-ui,sans-serif;font-weight:500;font-size:clamp(21px,2.8vw,29px);line-height:1.5;color:#22252B;margin:0 0 18px">The subtlest form of secondhand AI isn’t in what Alice sends — it’s in who she becomes. Writing alongside an opinionated AI can shift her own view without her ever noticing.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;text-align:left">
+        <div style="background:#DDE7E1;border:1px solid #C4D6D0;border-radius:14px;padding:18px 20px">
+          <div style="font-family:'Public Sans',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#3E6663;margin-bottom:8px">Aim</div>
+          <p style="margin:0;font-size:15px;line-height:1.5;color:#22252B">Test whether writing with an AI assistant that leans toward a particular opinion changes the writer’s own stated view afterwards.</p>
+        </div>
+        <div style="background:#DDE7E1;border:1px solid #C4D6D0;border-radius:14px;padding:18px 20px">
+          <div style="font-family:'Public Sans',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#3E6663;margin-bottom:8px">Hypothesis</div>
+          <p style="margin:0;font-size:15px;line-height:1.5;color:#22252B">Users co-writing with an opinionated language model will absorb its stance and be more likely to report holding that view — without being aware of the influence.</p>
+        </div>
+      </div>
+    </div>  </section>
+
+  <!-- ===== 3. PROCEDURE — BEIGE, connected by lines ===== -->
+  <section data-section="Procedure" style="min-height:80vh;background:#E7DDC8;display:flex;align-items:center;justify-content:center;padding:clamp(48px,7vw,72px) 24px;position:relative">
+    <div data-reveal style="max-width:520px;width:100%;position:relative;z-index:1">
+      <div style="text-align:center;margin-bottom:22px">        <h2 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,38px);margin:0;color:#22252B">Procedure</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center">
+        <sc-for list="{{ steps }}" as="st" hint-placeholder-count="3">
+          <div style="display:flex;flex-direction:column;align-items:center;width:100%">
+            <div style="width:100%;max-width:420px;background:#F3F1EA;border:1px solid #C4D6D0;border-radius:12px;padding:15px 22px;box-shadow:0 4px 14px rgba(80,64,20,.08)">
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:5px">
+                <div style="flex:none;width:26px;height:26px;border-radius:50%;background:#3E6663;color:#F3F1EA;display:flex;align-items:center;justify-content:center;font-family:'Public Sans',sans-serif;font-size:12px">{{ st.n }}</div>
+                <div style="font-family:'Public Sans',system-ui,sans-serif;font-weight:600;font-size:16px;color:#22252B">{{ st.title }}</div>
+              </div>
+              <p style="margin:0;font-size:13px;line-height:1.5;color:#33453F">{{ st.body }}</p>
+            </div>
+            <sc-if value="{{ st.hasNext }}" hint-placeholder-val="{{ true }}">
+              <div style="width:2px;height:14px;background:repeating-linear-gradient(to bottom,#8FB0AB 0 4px,transparent 4px 9px)"></div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>  </section>
+
+  <!-- ===== 4. RESULTS — PURPLE, text only ===== -->
+  <section data-section="Results" style="min-height:80vh;background:#F3F1EA;display:flex;align-items:center;justify-content:center;padding:clamp(48px,7vw,72px) 24px;position:relative">
+    <div data-reveal style="max-width:640px;text-align:center;position:relative;z-index:1">      <h2 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,38px);margin:0 0 22px;color:#22252B">Results</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;text-align:left">
+        <div style="background:#DDE7E1;border:1px solid #C4D6D0;border-radius:14px;padding:18px">
+          <div style="display:flex;align-items:flex-end;gap:10px;height:52px;margin-bottom:10px">
+            <div data-bar style="flex:1;height:52%;background:rgba(62,102,99,.4);border-radius:4px 4px 0 0"></div>
+            <div data-bar style="flex:1;height:100%;background:#3E6663;border-radius:4px 4px 0 0"></div>
+          </div>
+          <div data-num style="font-family:'Public Sans',system-ui,sans-serif;font-weight:700;font-size:30px;color:#22252B;line-height:1">Shift</div>
+          <p style="margin:6px 0 0;font-size:13.5px;line-height:1.5;color:#33453F">Writers moved toward the opinion their AI assistant favoured.</p>
+        </div>
+        <div style="background:#DDE7E1;border:1px solid #C4D6D0;border-radius:14px;padding:18px">
+          <div style="display:flex;align-items:flex-end;gap:10px;height:52px;margin-bottom:10px">
+            <div data-bar style="flex:1;height:100%;background:#3E6663;border-radius:4px 4px 0 0"></div>
+            <div data-bar style="flex:1;height:78%;background:rgba(62,102,99,.4);border-radius:4px 4px 0 0"></div>
+          </div>
+          <div data-num style="font-family:'Public Sans',system-ui,sans-serif;font-weight:700;font-size:30px;color:#3E6663;line-height:1">Unnoticed</div>
+          <p style="margin:6px 0 0;font-size:13.5px;line-height:1.5;color:#33453F">Most did not realise the assistant had influenced their view.</p>
+        </div>
+      </div>
+    </div>  </section>
+
+  <!-- ===== 5. KEY FINDINGS — BLUE, big ===== -->
+  <section data-section="Key findings" style="min-height:80vh;background:#E7DDC8;display:flex;align-items:center;justify-content:center;padding:clamp(48px,7vw,72px) 24px;position:relative">
+    <div data-reveal style="max-width:680px;position:relative;z-index:1">
+      <h2 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,38px);margin:0 0 22px;color:#22252B;text-align:center">Key findings</h2>
+      <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px">
+        <li style="display:flex;gap:18px;align-items:baseline">
+          <span style="font-family:'Public Sans',system-ui,sans-serif;font-weight:700;font-size:26px;color:#3E6663">01</span>
+          <span style="font-family:'Public Sans',system-ui,sans-serif;font-weight:500;font-size:clamp(21px,2.6vw,28px);line-height:1.4;color:#22252B">People who wrote with an opinionated AI assistant were more likely to later report holding its view.</span>
+        </li>
+        <li style="display:flex;gap:18px;align-items:baseline">
+          <span style="font-family:'Public Sans',system-ui,sans-serif;font-weight:700;font-size:26px;color:#3E6663">02</span>
+          <span style="font-family:'Public Sans',system-ui,sans-serif;font-weight:500;font-size:clamp(21px,2.6vw,28px);line-height:1.4;color:#22252B">The shift happened during the interaction, without participants noticing it.</span>
+        </li>
+        <li style="display:flex;gap:18px;align-items:baseline">
+          <span style="font-family:'Public Sans',system-ui,sans-serif;font-weight:700;font-size:26px;color:#3E6663">03</span>
+          <span style="font-family:'Public Sans',system-ui,sans-serif;font-weight:500;font-size:clamp(21px,2.6vw,28px);line-height:1.4;color:#22252B">It is carried into their later human conversations — an altered sender, not just an altered document.</span>
+        </li>
+      </ul>
+    </div>  </section>
+
+  <!-- ===== 6. IMPLICATIONS — BEIGE, big ===== -->
+  <section data-section="Implications" style="min-height:80vh;background:#3E6663;display:flex;align-items:center;justify-content:center;padding:clamp(48px,7vw,72px) 24px;position:relative">
+    <div data-reveal style="max-width:640px;text-align:center;position:relative;z-index:1">
+      <h2 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,38px);margin:0 0 16px;color:#F1F3F1">Implications</h2>
+      <p style="font-family:'Public Sans',system-ui,sans-serif;font-weight:600;font-size:clamp(26px,3.4vw,36px);line-height:1.4;color:#F3F1EA;margin:0 0 16px">AI can change the sender, not just the message.</p>
+      <p style="font-size:clamp(16px,2vw,19px);line-height:1.7;color:#E7DDC8;margin:0">Bob may talk to an Alice whose judgment was quietly shaped by an AI she used earlier. There is no artifact to label and no disclosure to give — the AI’s contribution is in how she now thinks. This is the hardest mode of secondhand AI to see, or to guard against.</p>
+    </div>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { active: 'Title' };
+
+  componentDidMount(){
+    this._sections = Array.from(document.querySelectorAll('[data-section]'));
+    this._scroller = document.querySelector('div[style*="scroll-snap-type"]');
+    this._io = new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{
+        if(en.isIntersecting && en.intersectionRatio > 0.6){
+          const label = en.target.getAttribute('data-section');
+          if(label !== this.state.active) this.setState({active: label});
+        }
+      });
+    }, { root: this._scroller, threshold: [0.6] });
+    this._sections.forEach(el => this._io.observe(el));
+    // ----- entrance motion (respects reduced-motion) -----
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!reduce){
+      this._reveals = Array.from(document.querySelectorAll('[data-reveal]'));
+      this._reveals.forEach(el=>{ el.style.opacity='0'; el.style.transform='translateY(24px)'; el.style.transition='opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)'; });
+      this._revealIO = new IntersectionObserver((ents)=>{ ents.forEach(en=>{ if(en.isIntersecting){ en.target.style.opacity='1'; en.target.style.transform='none'; this._revealIO.unobserve(en.target); } }); }, { threshold:.18 });
+      this._reveals.forEach(el=>this._revealIO.observe(el));
+
+      this._bars = Array.from(document.querySelectorAll('[data-bar]'));
+      this._bars.forEach(el=>{ el.style.transformOrigin='bottom'; el.style.transform='scaleY(0)'; el.style.transition='transform .85s cubic-bezier(.2,.7,.2,1)'; });
+      this._nums = Array.from(document.querySelectorAll('[data-num]'));
+      this._nums.forEach(el=>{ var t=el.textContent, m=t.match(/\d+(\.\d+)?/); if(m){ el.dataset.final=t; var dec=m[0].indexOf('.')>=0?m[0].split('.')[1].length:0; el.textContent = t.slice(0,m.index)+(0).toFixed(dec)+t.slice(m.index+m[0].length); } });
+      var results = document.querySelector('[data-section="Results"]');
+      if(results){
+        this._figIO = new IntersectionObserver((ents)=>{ ents.forEach(en=>{ if(en.isIntersecting){ this._playFigure(en.target); this._figIO.unobserve(en.target); } }); }, { threshold:.4 });
+        this._figIO.observe(results);
+      }
+    }
+  }
+
+  componentWillUnmount(){
+    if(this._io) this._io.disconnect();
+    if(this._revealIO) this._revealIO.disconnect();
+    if(this._figIO) this._figIO.disconnect();
+  }
+
+  _playFigure(section){
+    section.querySelectorAll('[data-bar]').forEach((b,i)=>{ setTimeout(()=>{ b.style.transform='scaleY(1)'; }, 90*i); });
+    section.querySelectorAll('[data-num]').forEach(el=>{
+      var final = el.dataset.final != null ? el.dataset.final : el.textContent;
+      var m = final.match(/\d+(\.\d+)?/);
+      if(!m){ el.textContent = final; return; }
+      var dec = m[0].indexOf('.')>=0 ? m[0].split('.')[1].length : 0;
+      var target = parseFloat(m[0]);
+      var prefix = final.slice(0,m.index), suffix = final.slice(m.index+m[0].length);
+      var start = performance.now(), dur = 1000;
+      var tick = (now)=>{ var t=Math.min((now-start)/dur,1), e=1-Math.pow(1-t,3); el.textContent = prefix + (target*e).toFixed(dec) + suffix; if(t<1) requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+    });
+  }
+
+  renderVals(){
+    const steps = [
+      {n:'1', title:'Assign a writing task', body:'Participants wrote a short essay on a debated topic with the help of an AI writing assistant.', hasNext:true},
+      {n:'2', title:'Vary the AI’s slant', body:'The assistant was tuned to suggest arguments leaning one way or the other on the topic.', hasNext:true},
+      {n:'3', title:'Survey afterwards', body:'Each participant’s own opinion was surveyed after writing and compared with the slant of their assistant.', hasNext:false},
+    ];
+    const labels = ['Title','Summary','Procedure','Results','Key findings','Implications'];
+    const toc = labels.map(label=>{
+      const active = label === this.state.active;
+      return {
+        label,
+        opacity: active ? 1 : 0.45,
+        labelOpacity: active ? 1 : 0,
+        dotSize: active ? '8px' : '6px',
+        goTo: ()=>{
+          const el = document.querySelector('[data-section="'+label+'"]');
+          if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+        },
+      };
+    });
+    return { steps, activeLabel: this.state.active, toc };
+  }
+}
+</script>
+</body>
+</html>
