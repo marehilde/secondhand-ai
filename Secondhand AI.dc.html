@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Archivo:wght@400;500;600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+:root{--ink:#22252B;--ink-2:#4A4E4A;--ink-muted:#585C58;--teal:#5E8A86;--teal-deep:#3E6663;--teal-pale:#8FB0AB;--clear-air:#E9ECEA;--amber:#C25A2B;--warm-white:#F4EEE2;--card:#FBFBFA}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font-family:'Public Sans',system-ui,sans-serif;font-weight:400;-webkit-font-smoothing:antialiased;line-height:1.6}
+a{color:var(--teal-deep);text-decoration:none}
+a:hover{color:var(--ink)}
+@keyframes cue{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(9px);opacity:1}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes mfade{from{opacity:0}to{opacity:1}}
+@keyframes mpop{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}html{scroll-behavior:auto}}
+h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}body{font-kerning:normal}
+</style>
+</helmet>
+
+<a href="Landing.dc.html" style="position:fixed;top:22px;left:24px;z-index:40;font-family:'Public Sans',sans-serif;font-size:11px;letter-spacing:.06em;color:var(--ink);background:rgba(255,255,255,.72);padding:8px 14px;border-radius:100px;backdrop-filter:blur(4px)">← Back to index</a>
+<div ref="{{ bgRef }}" style="position:fixed;inset:0;z-index:-2;background:linear-gradient(160deg,var(--clear-air),#E4DBC4);transition:background .25s linear"></div>
+<div style="position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(120% 80% at 50% -10%,rgba(34,37,43,.03),transparent 60%)"></div>
+<canvas ref="{{ netRef }}" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none"></canvas>
+
+<!-- ============ CONTENTS RAIL ============ -->
+<div style="position:fixed;top:50%;right:22px;transform:translateY(-50%);z-index:30;display:flex;flex-direction:column;gap:13px;align-items:flex-end">
+  <sc-for list="{{ pageToc }}" as="t" hint-placeholder-count="7">
+    <button type="button" onClick="{{ t.goTo }}" aria-label="{{ t.label }}" style="display:flex;align-items:center;gap:8px;cursor:pointer;background:none;border:none;padding:6px 2px;font:inherit;color:inherit">
+      <span style="font-family:'Public Sans',sans-serif;font-size:9.5px;letter-spacing:.04em;color:var(--teal-deep);white-space:nowrap;opacity:{{ t.labelOpacity }};transition:opacity .3s">{{ t.label }}</span>
+      <span style="border-radius:50%;background:var(--teal-deep);flex:none;transition:width .3s,height .3s,opacity .3s;width:{{ t.dotSize }};height:{{ t.dotSize }};opacity:{{ t.dotOpacity }}"></span>
+    </button>
+  </sc-for>
+</div>
+
+<!-- ============ HERO ============ -->
+<section style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px">
+  <div style="font-family:'Public Sans',sans-serif;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:30px">An explainer</div>
+  <h1 style="font-family:'Abril Fatface',Georgia,serif;font-weight:400;font-size:clamp(30px,10vw,140px);line-height:.95;letter-spacing:-.01em;text-transform:uppercase;margin:0;white-space:nowrap;color:var(--ink)">Second<span style="color:var(--amber)">hand</span> AI</h1>
+  <p style="font-family:'Public Sans',system-ui,sans-serif;font-size:clamp(19px,2.4vw,27px);line-height:1.5;font-weight:500;color:var(--ink-2);max-width:24ch;margin:34px 0 0">What one person's use of AI does to everyone downstream.</p>
+  <div style="margin-top:64px;display:flex;flex-direction:column;align-items:center;gap:8px;font-family:'Public Sans',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-deep)">
+    <span>Scroll</span>
+    <span style="font-size:18px;animation:cue 1.8s ease-in-out infinite">↓</span>
+  </div>
+</section>
+
+<!-- ============ INTRO + DEFINITION REVEAL ============ -->
+<section id="sec-definition" data-page-section="Definition" style="min-height:90vh;display:flex;align-items:center;justify-content:center;padding:clamp(56px,9vw,100px) 24px">
+  <div style="max-width:660px;text-align:center">
+    <p data-reveal="" style="opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);font-family:'Public Sans',sans-serif;font-size:15px;line-height:1.6;font-weight:400;color:var(--ink-muted);margin:0">You've heard about the effect of AI on the people who <em>use</em> it. This is about everyone else.</p>
+    <div data-reveal="" style="opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1) .15s,transform .9s cubic-bezier(.2,.7,.2,1) .15s;margin-top:48px">
+      <h2 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(30px,4.6vw,52px);line-height:1.1;letter-spacing:-.02em;color:var(--ink);margin:0 0 14px">What is secondhand AI?</h2>
+      <p style="font-family:'Public Sans',sans-serif;font-size:15px;color:var(--ink-muted);margin:0 0 26px">Take a moment to think about what you'd guess it means.</p>
+      <button onClick="{{ toggleDef }}" style="font-family:'Public Sans',sans-serif;font-size:15px;font-weight:500;color:var(--teal-deep);background:rgba(94,138,134,.1);border:1px solid rgba(62,102,99,.35);border-radius:100px;padding:11px 24px;cursor:pointer;transition:background .2s" style-hover="background:rgba(94,138,134,.18)">{{ defLabel }}</button>
+      <div style="display:none;display:{{ defDisplay }};margin-top:28px;padding:32px 34px;background:var(--card);border:1px solid rgba(34,37,43,.12);border-radius:16px;backdrop-filter:blur(4px)">
+        <p style="font-family:'Archivo',sans-serif;font-size:clamp(19px,2.4vw,25px);line-height:1.55;color:var(--ink);margin:0"><b style="font-style:normal;font-weight:500">Secondhand AI</b> — the downstream effect of one person's AI use on what others receive, how they interpret it, and what they pass on.</p>
+      </div>
+      <p style="display:none;display:{{ defDisplay }};margin:16px 0 0;font-family:'Public Sans',sans-serif;font-size:13.5px;line-height:1.5;color:var(--ink-muted)">It's about how AI reaches into our social interactions — shaping what we say to each other, and how we say it. Let's look at an example.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GENERAL ANECDOTE ============ -->
+<section id="sec-example" data-page-section="Example" ref="{{ anecGenRef }}" style="height:260vh;position:relative">
+  <div style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center">
+    <div style="width:100%;max-width:640px;margin:0 auto;padding:0 40px">
+      <div style="font-family:'Public Sans',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:8px;text-align:center">Fig. — a note, and what it carries</div>
+      <div style="position:relative;height:198px;margin:0 auto 20px">
+
+        <!-- Alice -->
+        <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center">
+          <div style="position:relative;width:72px;height:70px;margin-bottom:8px">
+            <div style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:26px;height:26px;border-radius:50%;background:var(--ink)"></div>
+            <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:66px;height:38px;border-radius:33px 33px 0 0;background:var(--ink)"></div>
+          </div>
+          <div style="font-family:'Public Sans',sans-serif;font-size:10.5px;color:var(--ink-2);white-space:nowrap">Alice</div>
+        </div>
+        <div ref="{{ aiGenRef }}" style="position:absolute;top:2px;left:calc(50% + 58px);opacity:0;transition:opacity .5s;display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;border:1.3px dashed var(--teal-deep);font-family:'Public Sans',sans-serif;font-size:9.5px;color:var(--teal-deep);background:rgba(94,138,134,.12)">AI</div>
+
+        <div ref="{{ lineGenRef }}" style="position:absolute;top:70px;left:50%;width:2px;height:58px;background:repeating-linear-gradient(to bottom,rgba(34,37,43,.4) 0 4px,transparent 4px 9px);transform:translateX(-50%) scaleY(0);transform-origin:top"></div>
+        <div ref="{{ artifactGenRef }}" style="position:absolute;left:50%;top:70px;transform:translateX(-50%);opacity:0;width:26px;height:32px;border-radius:3px;background:var(--card);border:1px solid rgba(34,37,43,.2);box-shadow:0 4px 10px rgba(20,18,50,.3)">
+          <div style="position:absolute;top:7px;left:5px;right:5px;height:1.5px;background:rgba(34,37,43,.4)"></div>
+          <div style="position:absolute;top:12px;left:5px;right:5px;height:1.5px;background:rgba(34,37,43,.4)"></div>
+        </div>
+
+        <!-- Bob -->
+        <div style="position:absolute;top:128px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center">
+          <div style="position:relative;width:72px;height:70px;margin-bottom:8px">
+            <div style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:26px;height:26px;border-radius:50%;background:rgba(34,37,43,.5)"></div>
+            <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:66px;height:38px;border-radius:33px 33px 0 0;background:rgba(34,37,43,.5)"></div>
+          </div>
+          <div style="font-family:'Public Sans',sans-serif;font-size:10.5px;color:var(--ink-2);white-space:nowrap">Bob</div>
+        </div>
+      </div>
+
+      <div style="position:relative;height:104px;text-align:center;max-width:680px;margin:0 auto">
+        <sc-for list="{{ anecStepsGen }}" as="s" hint-placeholder-count="4">
+          <p data-anec-step style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .5s;font-family:'Public Sans',system-ui,sans-serif;font-weight:500;font-size:clamp(18px,2.1vw,25px);line-height:1.4;color:var(--ink);margin:0;pointer-events:none">{{ s.text }}</p>
+        </sc-for>
+      </div>
+      <p style="text-align:center;font-family:'Public Sans',sans-serif;font-size:11px;color:var(--ink-muted);margin:8px 0 0">Neither of them used AI to have this exchange — yet AI shaped it anyway.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MAP — PREVIEW OF THE THREE MODES ============ -->
+<section id="sec-modes" data-page-section="3 Modes" style="padding:clamp(16px,3vw,28px) 24px clamp(64px,9vw,96px);display:flex;justify-content:center">
+  <div data-reveal style="opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);max-width:760px;width:100%">
+    <div style="text-align:center;margin-bottom:36px">
+      <h2 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(24px,3.4vw,34px);line-height:1.25;margin:0;color:var(--ink)">One story, three ways it reaches Bob</h2>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px">
+
+      <!-- row 1: content overload -->
+      <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;background:var(--card);border:1px solid rgba(34,37,43,.12);border-radius:16px;padding:22px 24px">
+        <div style="flex:1;min-width:200px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+            <span style="font-family:'Public Sans',sans-serif;font-size:12px;font-weight:700;color:var(--warm-white);background:var(--teal-deep);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center">1</span>
+            <span style="font-family:'Archivo',sans-serif;font-weight:600;font-size:18px;color:var(--ink)">Content overload</span>
+          </div>
+          <p style="margin:0;font-size:13.5px;line-height:1.5;color:var(--ink-muted)">AI makes it cheap for Alice to produce, costly for Bob to verify.</p>
+        </div>
+        <div style="flex:none;display:flex;align-items:center;gap:6px">
+          <div style="width:16px;height:16px;border-radius:50%;background:var(--ink)"></div>
+          <span style="color:var(--ink-muted);font-size:13px">→</span>
+          <div style="width:16px;height:16px;border-radius:50%;border:1.2px dashed var(--teal-deep)"></div>
+          <span style="color:var(--ink-muted);font-size:13px">→</span>
+          <div style="display:flex;gap:2px">
+            <div style="width:8px;height:11px;border-radius:2px;background:rgba(34,37,43,.5)"></div>
+            <div style="width:8px;height:11px;border-radius:2px;background:rgba(34,37,43,.6)"></div>
+            <div style="width:8px;height:11px;border-radius:2px;background:var(--ink)"></div>
+          </div>
+          <span style="color:var(--ink-muted);font-size:13px">→</span>
+          <div style="width:16px;height:16px;border-radius:50%;background:rgba(34,37,43,.5)"></div>
+        </div>
+      </div>
+
+      <!-- row 2: illusory expertise -->
+      <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;background:var(--card);border:1px solid rgba(34,37,43,.12);border-radius:16px;padding:22px 24px">
+        <div style="flex:1;min-width:200px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+            <span style="font-family:'Public Sans',sans-serif;font-size:12px;font-weight:700;color:var(--warm-white);background:var(--teal-deep);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center">2</span>
+            <span style="font-family:'Archivo',sans-serif;font-weight:600;font-size:18px;color:var(--ink)">Illusory expertise</span>
+          </div>
+          <p style="margin:0;font-size:13.5px;line-height:1.5;color:var(--ink-muted)">AI can mask whether Alice's understanding is deep or shallow.</p>
+        </div>
+        <div style="flex:none;display:flex;flex-direction:column;gap:5px">
+          <div style="display:flex;align-items:center;gap:6px">
+            <span style="font-family:'Public Sans',sans-serif;font-size:8.5px;color:var(--teal-deep);width:44px">deep</span>
+            <span style="color:var(--ink-muted);font-size:11px">→</span>
+            <div style="width:12px;height:15px;border-radius:2px;background:var(--ink)"></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px">
+            <span style="font-family:'Public Sans',sans-serif;font-size:8.5px;color:var(--amber);width:44px">shallow</span>
+            <span style="color:var(--ink-muted);font-size:11px">→</span>
+            <div style="width:12px;height:15px;border-radius:2px;background:var(--ink)"></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;margin-top:2px">
+            <span style="color:var(--ink-muted);font-size:11px;margin-left:56px">→</span>
+            <span style="font-family:'Public Sans',sans-serif;font-size:10px;font-weight:700;color:var(--warm-white);background:var(--teal-deep);width:15px;height:15px;border-radius:50%;display:flex;align-items:center;justify-content:center">?</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- row 3: altered sender -->
+      <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;background:var(--card);border:1px solid rgba(34,37,43,.12);border-radius:16px;padding:22px 24px">
+        <div style="flex:1;min-width:200px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+            <span style="font-family:'Public Sans',sans-serif;font-size:12px;font-weight:700;color:var(--warm-white);background:var(--teal-deep);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center">3</span>
+            <span style="font-family:'Archivo',sans-serif;font-weight:600;font-size:18px;color:var(--ink)">An altered sender</span>
+          </div>
+          <p style="margin:0;font-size:13.5px;line-height:1.5;color:var(--ink-muted)">Using AI changes Alice's own perspective — and how she talks to Bob.</p>
+        </div>
+        <div style="flex:none;display:flex;align-items:center;gap:6px">
+          <div style="width:16px;height:16px;border-radius:50%;border:1.2px dashed var(--teal-deep)"></div>
+          <span style="color:var(--ink-muted);font-size:13px">⇢</span>
+          <div style="position:relative;width:16px;height:16px;border-radius:50%;background:var(--ink)">
+            <div style="position:absolute;inset:-4px;border-radius:50%;border:1.2px dashed var(--teal-deep)"></div>
+          </div>
+          <span style="color:var(--ink-muted);font-size:13px">→</span>
+          <div style="width:18px;height:13px;border-radius:8px 8px 8px 2px;border:1.2px solid var(--teal-deep)"></div>
+          <span style="color:var(--ink-muted);font-size:13px">→</span>
+          <div style="width:16px;height:16px;border-radius:50%;background:rgba(34,37,43,.5)"></div>
+        </div>
+      </div>
+
+    </div>
+    <p style="text-align:center;font-family:'Public Sans',sans-serif;font-size:11.5px;color:var(--ink-muted);margin:26px 0 0">In all three modes, Bob may be unaware of Alice's AI use.</p>
+  </div>
+</section>
+
+<!-- ============ THREE MODES — HORIZONTAL SCROLL, EXPLANATION THEN ANECDOTE ============ -->
+<section data-page-section="3 Modes" ref="{{ modesOuterRef }}" style="height:340vh;position:relative">
+  <div style="position:sticky;top:0;height:100vh;overflow:hidden">
+    <div ref="{{ modesStripRef }}" style="display:flex;height:100vh;will-change:transform">
+
+      <!-- PANEL 1: Content overload -->
+      <div ref="{{ panel1Ref }}" style="width:100vw;height:100vh;flex:none;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 40px">
+        <div style="position:absolute;top:20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;gap:10px;z-index:3">
+          <sc-for list="{{ anecSteps1 }}" as="s" hint-placeholder-count="4">
+            <div data-rail style="width:9px;height:9px;border-radius:50%;background:rgba(34,37,43,.2);transition:background .4s"></div>
+          </sc-for>
+        </div>
+        <div style="width:100%;max-width:600px">
+          <div style="text-align:center;margin-bottom:18px">
+            <div style="font-family:'Public Sans',sans-serif;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:8px">Mode 1 of 3</div>
+            <h2 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(24px,3.4vw,34px);margin:0 0 10px;color:var(--ink)">Content overload</h2>
+            <p style="font-size:14px;line-height:1.5;color:var(--ink-2);margin:0 0 12px;max-width:46ch;margin-left:auto;margin-right:auto">AI makes content cheap to produce but costly to verify — volume grows, review time doesn't.</p>
+            <div style="display:inline-block;font-family:'Public Sans',sans-serif;font-size:11px;color:var(--teal-deep);background:rgba(94,138,134,.1);border:1px solid rgba(62,102,99,.35);border-radius:100px;padding:6px 16px">40% of desk workers received AI-generated "workslop" last month.</div>
+          </div>
+
+          <div style="position:relative;height:260px;margin:0 auto 10px">
+            <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center">
+              <div style="position:relative;width:60px;height:58px;margin-bottom:6px">
+                <div style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:22px;height:22px;border-radius:50%;background:var(--ink)"></div>
+                <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:54px;height:32px;border-radius:27px 27px 0 0;background:var(--ink)"></div>
+              </div>
+              <div style="font-family:'Public Sans',sans-serif;font-size:10px;color:var(--ink-2);white-space:nowrap">Clinician</div>
+            </div>
+            <div ref="{{ ai1Ref }}" style="position:absolute;top:2px;left:calc(50% + 46px);opacity:0;transition:opacity .5s;display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;border:1.2px dashed var(--teal-deep);font-family:'Public Sans',sans-serif;font-size:9px;color:var(--teal-deep);background:rgba(94,138,134,.12)">AI</div>
+
+            <div ref="{{ line1Ref }}" style="position:absolute;top:58px;left:50%;width:2px;height:44px;background:repeating-linear-gradient(to bottom,rgba(34,37,43,.4) 0 4px,transparent 4px 9px);transform:translateX(-50%) scaleY(0);transform-origin:top"></div>
+            <div ref="{{ artifact1Ref }}" style="position:absolute;left:50%;top:58px;transform:translateX(-50%);opacity:0;width:22px;height:27px;border-radius:3px;background:var(--card);border:1px solid rgba(34,37,43,.2);box-shadow:0 4px 10px rgba(20,18,50,.3)">
+              <div style="position:absolute;top:6px;left:4px;right:4px;height:1.5px;background:rgba(34,37,43,.4)"></div>
+              <div style="position:absolute;top:10px;left:4px;right:4px;height:1.5px;background:rgba(34,37,43,.4)"></div>
+            </div>
+
+            <div style="position:absolute;top:102px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center">
+              <div style="position:relative;width:60px;height:58px;margin-bottom:6px">
+                <div style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:22px;height:22px;border-radius:50%;background:rgba(34,37,43,.5)"></div>
+                <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:54px;height:32px;border-radius:27px 27px 0 0;background:rgba(34,37,43,.5)"></div>
+              </div>
+              <div style="font-family:'Public Sans',sans-serif;font-size:10px;color:var(--ink-2);white-space:nowrap">Another clinician</div>
+            </div>
+
+            <svg viewBox="0 0 600 220" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible">
+              <defs><marker id="arrow1" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 z" fill="#5E8A86"></path></marker></defs>
+              <path ref="{{ fan10Ref }}" pathLength="100" d="M300,162 L90,204" fill="none" stroke="#5E8A86" stroke-width="1.4" stroke-dasharray="100" stroke-dashoffset="100" marker-end="url(#arrow1)"></path>
+              <path ref="{{ fan11Ref }}" pathLength="100" d="M300,162 L300,204" fill="none" stroke="#5E8A86" stroke-width="1.4" stroke-dasharray="100" stroke-dashoffset="100" marker-end="url(#arrow1)"></path>
+              <path ref="{{ fan12Ref }}" pathLength="100" d="M300,162 L510,204" fill="none" stroke="#5E8A86" stroke-width="1.4" stroke-dasharray="100" stroke-dashoffset="100" marker-end="url(#arrow1)"></path>
+            </svg>
+
+            <div style="position:absolute;top:212px;left:15%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center">
+              <div style="position:relative;width:48px;height:46px;margin-bottom:4px">
+                <div style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:17px;height:17px;border-radius:50%;background:rgba(34,37,43,.4)"></div>
+                <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:44px;height:25px;border-radius:22px 22px 0 0;background:rgba(34,37,43,.4)"></div>
+                <div ref="{{ chip10Ref }}" style="position:absolute;top:-9px;left:50%;transform:translateX(-50%);opacity:0;transition:opacity .5s;width:11px;height:14px;border-radius:2px;background:#5E8A86"></div>
+              </div>
+              <div style="font-family:'Public Sans',sans-serif;font-size:8.5px;color:var(--ink-muted);white-space:nowrap">Colleague</div>
+            </div>
+            <div style="position:absolute;top:212px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center">
+              <div style="position:relative;width:48px;height:46px;margin-bottom:4px">
+                <div style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:17px;height:17px;border-radius:50%;background:rgba(34,37,43,.4)"></div>
+                <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:44px;height:25px;border-radius:22px 22px 0 0;background:rgba(34,37,43,.4)"></div>
+                <div ref="{{ chip11Ref }}" style="position:absolute;top:-9px;left:50%;transform:translateX(-50%);opacity:0;transition:opacity .5s;width:11px;height:14px;border-radius:2px;background:#5E8A86"></div>
+              </div>
+              <div style="font-family:'Public Sans',sans-serif;font-size:8.5px;color:var(--ink-muted);white-space:nowrap">Colleague</div>
+            </div>
+            <div style="position:absolute;top:212px;left:85%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center">
+              <div style="position:relative;width:48px;height:46px;margin-bottom:4px">
+                <div style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:17px;height:17px;border-radius:50%;background:rgba(34,37,43,.5)"></div>
+                <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:44px;height:25px;border-radius:22px 22px 0 0;background:rgba(34,37,43,.5)"></div>
+                <div ref="{{ chip12Ref }}" style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);opacity:0;transition:opacity .5s;font-family:'Public Sans',sans-serif;font-size:8px;white-space:nowrap;font-weight:600;color:var(--amber);background:rgba(194,90,43,.16);border-radius:5px;padding:2px 4px">⚠ vague error</div>
+              </div>
+              <div style="font-family:'Public Sans',sans-serif;font-size:8.5px;color:var(--ink-muted);white-space:nowrap">Patient</div>
+            </div>
+          </div>
+
+          <div style="position:relative;height:56px;text-align:center;max-width:560px;margin:0 auto">
+            <sc-for list="{{ anecSteps1 }}" as="s" hint-placeholder-count="4">
+              <p data-anec-step style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .5s;font-family:'Public Sans',system-ui,sans-serif;font-weight:500;font-size:clamp(14px,1.6vw,17px);line-height:1.35;color:var(--ink);margin:0;pointer-events:none">{{ s.text }}</p>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 2: Illusory expertise -->
+      <div ref="{{ panel2Ref }}" style="width:100vw;height:100vh;flex:none;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 40px">
+        <div style="position:absolute;top:20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;gap:10px;z-index:3">
+          <sc-for list="{{ anecSteps2 }}" as="s" hint-placeholder-count="4">
+            <div data-rail style="width:9px;height:9px;border-radius:50%;background:rgba(34,37,43,.2);transition:background .4s"></div>
+          </sc-for>
+        </div>
+        <div style="width:100%;max-width:600px">
+          <div style="text-align:center;margin-bottom:18px">
+            <div style="font-family:'Public Sans',sans-serif;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:8px">Mode 2 of 3</div>
+            <h2 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(24px,3.4vw,34px);margin:0 0 10px;color:var(--ink)">Illusory expertise</h2>
+            <p style="font-size:14px;line-height:1.5;color:var(--ink-2);margin:0 0 12px;max-width:46ch;margin-left:auto;margin-right:auto">AI can make fluency cheap regardless of how deep the understanding is — so listeners lose a cue they used to trust.</p>
+            <div style="display:inline-block;font-family:'Public Sans',sans-serif;font-size:11px;color:var(--teal-deep);background:rgba(94,138,134,.1);border:1px solid rgba(62,102,99,.35);border-radius:100px;padding:6px 16px">Readers rate AI-written messages as more competent — until told AI was involved.</div>
+          </div>
+
+          <div style="position:relative;height:260px;margin:0 auto 10px">
+            <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center">
+              <div style="position:relative;width:60px;height:58px;margin-bottom:6px">
+                <div style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:22px;height:22px;border-radius:50%;background:var(--ink)"></div>
+                <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:54px;height:32px;border-radius:27px 27px 0 0;background:var(--ink)"></div>
+              </div>
+              <div style="font-family:'Public Sans',sans-serif;font-size:10px;color:var(--ink-2);white-space:nowrap">A student</div>
+            </div>
+            <div ref="{{ ai2Ref }}" style="position:absolute;top:2px;left:calc(50% + 46px);opacity:0;transition:opacity .5s;display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;border:1.2px dashed var(--teal-deep);font-family:'Public Sans',sans-serif;font-size:9px;color:var(--teal-deep);background:rgba(94,138,134,.12)">AI</div>
+
+            <div ref="{{ line2Ref }}" style="position:absolute;top:58px;left:50%;width:2px;height:44px;background:repeating-linear-gradient(to bottom,rgba(34,37,43,.4) 0 4px,transparent 4px 9px);transform:translateX(-50%) scaleY(0);transform-origin:top"></div>
+            <div ref="{{ artifact2Ref }}" style="position:absolute;left:50%;top:58px;transform:translateX(-50%);opacity:0;width:26px;height:19px;border-radius:9px 9px 9px 3px;background:linear-gradient(135deg,var(--card),var(--warm-white));border:1px solid rgba(34,37,43,.2);box-shadow:0 4px 10px rgba(34,37,43,.15)"></div>
+
+            <div style="position:absolute;top:102px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center">
+              <div style="position:relative;width:60px;height:58px;margin-bottom:6px">
+                <div style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:22px;height:22px;border-radius:50%;background:rgba(34,37,43,.5)"></div>
+                <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:54px;height:32px;border-radius:27px 27px 0 0;background:rgba(34,37,43,.5)"></div>
+              </div>
+              <div style="font-family:'Public Sans',sans-serif;font-size:10px;color:var(--ink-2);white-space:nowrap">A classmate</div>
+            </div>
+
+            <svg viewBox="0 0 600 220" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible">
+              <defs><marker id="arrow2" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 z" fill="#5E8A86"></path></marker></defs>
+              <path ref="{{ fan20Ref }}" pathLength="100" d="M300,162 L90,204" fill="none" stroke="#5E8A86" stroke-width="1.4" stroke-dasharray="100" stroke-dashoffset="100" marker-end="url(#arrow2)"></path>
+              <path ref="{{ fan21Ref }}" pathLength="100" d="M300,162 L300,204" fill="none" stroke="#5E8A86" stroke-width="1.4" stroke-dasharray="100" stroke-dashoffset="100" marker-end="url(#arrow2)"></path>
+              <path ref="{{ fan22Ref }}" pathLength="100" d="M300,162 L510,204" fill="none" stroke="#5E8A86" stroke-width="1.4" stroke-dasharray="100" stroke-dashoffset="100" marker-end="url(#arrow2)"></path>
+            </svg>
+
+            <div style="position:absolute;top:212px;left:15%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center">
+              <div style="position:relative;width:48px;height:46px;margin-bottom:4px">
+                <div style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:17px;height:17px;border-radius:50%;background:rgba(34,37,43,.4)"></div>
+                <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:44px;height:25px;border-radius:22px 22px 0 0;background:rgba(34,37,43,.4)"></div>
+                <div ref="{{ chip20Ref }}" style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);opacity:0;transition:opacity .5s;font-family:'Public Sans',sans-serif;font-size:9px;font-weight:700;color:var(--warm-white);background:var(--teal-deep);border-radius:50%;width:15px;height:15px;display:flex;align-items:center;justify-content:center">?</div>
+              </div>
+              <div style="font-family:'Public Sans',sans-serif;font-size:8.5px;color:var(--ink-muted);white-space:nowrap">Classmate</div>
+            </div>
+            <div style="position:absolute;top:212px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center">
+              <div style="position:relative;width:48px;height:46px;margin-bottom:4px">
+                <div style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:17px;height:17px;border-radius:50%;background:rgba(34,37,43,.4)"></div>
+                <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:44px;height:25px;border-radius:22px 22px 0 0;background:rgba(34,37,43,.4)"></div>
+                <div ref="{{ chip21Ref }}" style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);opacity:0;transition:opacity .5s;font-family:'Public Sans',sans-serif;font-size:9px;font-weight:700;color:var(--warm-white);background:var(--teal-deep);border-radius:50%;width:15px;height:15px;display:flex;align-items:center;justify-content:center">?</div>
+              </div>
+              <div style="font-family:'Public Sans',sans-serif;font-size:8.5px;color:var(--ink-muted);white-space:nowrap">Classmate</div>
+            </div>
+            <div style="position:absolute;top:212px;left:85%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center">
+              <div style="position:relative;width:48px;height:46px;margin-bottom:4px">
+                <div style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:17px;height:17px;border-radius:50%;background:rgba(34,37,43,.4)"></div>
+                <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:44px;height:25px;border-radius:22px 22px 0 0;background:rgba(34,37,43,.4)"></div>
+                <div ref="{{ chip22Ref }}" style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);opacity:0;transition:opacity .5s;font-family:'Public Sans',sans-serif;font-size:9px;font-weight:700;color:var(--warm-white);background:var(--teal-deep);border-radius:50%;width:15px;height:15px;display:flex;align-items:center;justify-content:center">?</div>
+              </div>
+              <div style="font-family:'Public Sans',sans-serif;font-size:8.5px;color:var(--ink-muted);white-space:nowrap">Classmate</div>
+            </div>
+          </div>
+
+          <div style="position:relative;height:56px;text-align:center;max-width:560px;margin:0 auto">
+            <sc-for list="{{ anecSteps2 }}" as="s" hint-placeholder-count="4">
+              <p data-anec-step style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .5s;font-family:'Public Sans',system-ui,sans-serif;font-weight:500;font-size:clamp(14px,1.6vw,17px);line-height:1.35;color:var(--ink);margin:0;pointer-events:none">{{ s.text }}</p>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 3: An altered sender -->
+      <div ref="{{ panel3Ref }}" style="width:100vw;height:100vh;flex:none;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 40px">
+        <div style="position:absolute;top:20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;gap:10px;z-index:3">
+          <sc-for list="{{ anecSteps3 }}" as="s" hint-placeholder-count="4">
+            <div data-rail style="width:9px;height:9px;border-radius:50%;background:rgba(34,37,43,.2);transition:background .4s"></div>
+          </sc-for>
+        </div>
+        <div style="width:100%;max-width:600px">
+          <div style="text-align:center;margin-bottom:18px">
+            <div style="font-family:'Public Sans',sans-serif;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:8px">Mode 3 of 3</div>
+            <h2 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(24px,3.4vw,34px);margin:0 0 10px;color:var(--ink)">An altered sender</h2>
+            <p style="font-size:14px;line-height:1.5;color:var(--ink-2);margin:0 0 12px;max-width:46ch;margin-left:auto;margin-right:auto">Alice's own judgment can shift after using an opinionated AI — and she carries it into every conversation after.</p>
+            <div style="display:inline-block;font-family:'Public Sans',sans-serif;font-size:11px;color:var(--teal-deep);background:rgba(94,138,134,.1);border:1px solid rgba(62,102,99,.35);border-radius:100px;padding:6px 16px">People who used an opinionated AI assistant adopted its view without realizing it had shifted.</div>
+          </div>
+
+          <div style="position:relative;height:260px;margin:0 auto 10px">
+            <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center">
+              <div style="position:relative;width:60px;height:58px;margin-bottom:6px">
+                <div ref="{{ tintAliceRef }}" style="position:absolute;left:50%;top:-4px;transform:translateX(-50%);width:30px;height:30px;border-radius:50%;border:1.6px dashed var(--teal-deep);opacity:0;transition:opacity .3s"></div>
+                <div style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:22px;height:22px;border-radius:50%;background:var(--ink)"></div>
+                <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:54px;height:32px;border-radius:27px 27px 0 0;background:var(--ink)"></div>
+              </div>
+              <div style="font-family:'Public Sans',sans-serif;font-size:10px;color:var(--ink-2);white-space:nowrap">Alice</div>
+            </div>
+            <div ref="{{ ai3Ref }}" style="position:absolute;top:2px;left:calc(50% + 46px);opacity:0;transition:opacity .5s;display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;border:1.2px dashed var(--teal-deep);font-family:'Public Sans',sans-serif;font-size:9px;color:var(--teal-deep);background:rgba(94,138,134,.12)">AI</div>
+
+            <div ref="{{ line3Ref }}" style="position:absolute;top:58px;left:50%;width:2px;height:44px;background:repeating-linear-gradient(to bottom,rgba(34,37,43,.4) 0 4px,transparent 4px 9px);transform:translateX(-50%) scaleY(0);transform-origin:top"></div>
+            <div ref="{{ artifact3Ref }}" style="position:absolute;left:50%;top:58px;transform:translateX(-50%);opacity:0;width:30px;height:21px;border-radius:10px 10px 10px 3px;background:var(--card);border:1px solid rgba(34,37,43,.2);box-shadow:0 4px 10px rgba(34,37,43,.15)"></div>
+
+            <div style="position:absolute;top:102px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center">
+              <div style="position:relative;width:60px;height:58px;margin-bottom:6px">
+                <div ref="{{ tintBobRef }}" style="position:absolute;left:50%;top:-4px;transform:translateX(-50%);width:30px;height:30px;border-radius:50%;border:1.6px dashed var(--teal-deep);opacity:0;transition:opacity .3s"></div>
+                <div style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:22px;height:22px;border-radius:50%;background:rgba(34,37,43,.5)"></div>
+                <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:54px;height:32px;border-radius:27px 27px 0 0;background:rgba(34,37,43,.5)"></div>
+              </div>
+              <div style="font-family:'Public Sans',sans-serif;font-size:10px;color:var(--ink-2);white-space:nowrap">Bob</div>
+            </div>
+
+            <svg viewBox="0 0 600 220" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible">
+              <defs><marker id="arrow3" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 z" fill="#5E8A86"></path></marker></defs>
+              <path ref="{{ fan30Ref }}" pathLength="100" d="M300,162 L90,204" fill="none" stroke="#5E8A86" stroke-width="1.4" stroke-dasharray="100" stroke-dashoffset="100" marker-end="url(#arrow3)"></path>
+              <path ref="{{ fan31Ref }}" pathLength="100" d="M300,162 L300,204" fill="none" stroke="#5E8A86" stroke-width="1.4" stroke-dasharray="100" stroke-dashoffset="100" marker-end="url(#arrow3)"></path>
+              <path ref="{{ fan32Ref }}" pathLength="100" d="M300,162 L510,204" fill="none" stroke="#5E8A86" stroke-width="1.4" stroke-dasharray="100" stroke-dashoffset="100" marker-end="url(#arrow3)"></path>
+            </svg>
+
+            <div style="position:absolute;top:212px;left:15%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center">
+              <div style="position:relative;width:48px;height:46px;margin-bottom:4px">
+                <div ref="{{ chip30Ref }}" style="position:absolute;left:50%;top:-3px;transform:translateX(-50%);width:24px;height:24px;border-radius:50%;border:1.3px dashed var(--teal-deep);opacity:0;transition:opacity .5s"></div>
+                <div style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:17px;height:17px;border-radius:50%;background:rgba(34,37,43,.4)"></div>
+                <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:44px;height:25px;border-radius:22px 22px 0 0;background:rgba(34,37,43,.4)"></div>
+              </div>
+              <div style="font-family:'Public Sans',sans-serif;font-size:8.5px;color:var(--ink-muted);white-space:nowrap">Teammate</div>
+            </div>
+            <div style="position:absolute;top:212px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center">
+              <div style="position:relative;width:48px;height:46px;margin-bottom:4px">
+                <div ref="{{ chip31Ref }}" style="position:absolute;left:50%;top:-3px;transform:translateX(-50%);width:24px;height:24px;border-radius:50%;border:1.3px dashed var(--teal-deep);opacity:0;transition:opacity .5s"></div>
+                <div style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:17px;height:17px;border-radius:50%;background:rgba(34,37,43,.4)"></div>
+                <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:44px;height:25px;border-radius:22px 22px 0 0;background:rgba(34,37,43,.4)"></div>
+              </div>
+              <div style="font-family:'Public Sans',sans-serif;font-size:8.5px;color:var(--ink-muted);white-space:nowrap">Teammate</div>
+            </div>
+            <div style="position:absolute;top:212px;left:85%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center">
+              <div style="position:relative;width:48px;height:46px;margin-bottom:4px">
+                <div ref="{{ chip32Ref }}" style="position:absolute;left:50%;top:-3px;transform:translateX(-50%);width:24px;height:24px;border-radius:50%;border:1.3px dashed var(--teal-deep);opacity:0;transition:opacity .5s"></div>
+                <div style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:17px;height:17px;border-radius:50%;background:rgba(34,37,43,.4)"></div>
+                <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:44px;height:25px;border-radius:22px 22px 0 0;background:rgba(34,37,43,.4)"></div>
+              </div>
+              <div style="font-family:'Public Sans',sans-serif;font-size:8.5px;color:var(--ink-muted);white-space:nowrap">Teammate</div>
+            </div>
+          </div>
+
+          <div style="position:relative;height:56px;text-align:center;max-width:560px;margin:0 auto">
+            <sc-for list="{{ anecSteps3 }}" as="s" hint-placeholder-count="4">
+              <p data-anec-step style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .5s;font-family:'Public Sans',system-ui,sans-serif;font-weight:500;font-size:clamp(14px,1.6vw,17px);line-height:1.35;color:var(--ink);margin:0;pointer-events:none">{{ s.text }}</p>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ WHY IT MATTERS ============ -->
+<section id="sec-relevance" data-page-section="Relevance" style="min-height:90vh;display:flex;align-items:center;justify-content:center;padding:clamp(64px,10vw,110px) 24px">
+  <div data-reveal="" style="opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);max-width:640px;width:100%;text-align:center;background:#e8dcc4;border-radius:20px;padding:48px 44px;box-shadow:0 20px 60px rgba(0,0,0,.25)">
+    <div style="font-family:'Public Sans',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#6B5127;margin-bottom:22px">Why it matters</div>
+    <p style="font-family:'Public Sans',system-ui,sans-serif;font-weight:500;font-size:clamp(21px,2.8vw,30px);line-height:1.45;color:var(--ink);margin:0">We judge each other by what we produce. When AI changes what fluency means, it quietly changes how we read everyone — including the people who never touched it.</p>
+  </div>
+</section>
+
+<!-- ============ RESEARCH OVERVIEW — DRAWER ============ -->
+<section id="sec-research" data-page-section="Research" style="padding:clamp(64px,10vw,120px) 24px;display:flex;justify-content:center">
+  <div data-reveal="" style="opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);width:100%;max-width:860px">
+    <div style="text-align:center;margin-bottom:44px">
+      <h2 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(30px,4.4vw,48px);margin:0;color:var(--ink)">Research overview</h2>
+      <p style="color:var(--ink);font-size:15px;margin:14px auto 0;max-width:46ch">Pull a study from the drawer. Each opens as its own page.</p>
+    </div>
+
+    <!-- tabs -->
+    <div style="display:flex;gap:6px;padding:0 8px">
+      <sc-for list="{{ papers }}" as="p" hint-placeholder-count="4">
+        <button onClick="{{ p.select }}" style="{{ p.tabStyle }}">{{ p.tab }}</button>
+      </sc-for>
+    </div>
+
+    <!-- active study -->
+    <div style="background:var(--card);border:1px solid rgba(34,37,43,.12);border-radius:2px 16px 16px 16px;box-shadow:0 12px 40px rgba(30,50,80,.1);padding:40px 44px;backdrop-filter:blur(6px)">
+      <div style="display:flex;gap:36px;align-items:flex-start;flex-wrap:wrap">
+        <div style="flex:1;min-width:280px">
+          <div style="font-family:'Public Sans',sans-serif;font-size:11px;letter-spacing:.1em;color:var(--teal-deep);margin-bottom:12px">{{ active.venue }}</div>
+          <h3 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(24px,3vw,34px);line-height:1.15;margin:0 0 14px;color:var(--ink)">{{ active.title }}</h3>
+          <div style="font-size:14px;color:var(--ink-muted);margin-bottom:20px">{{ active.authors }}</div>
+          <p style="font-size:15.5px;line-height:1.65;color:var(--ink-2);margin:0 0 26px">{{ active.blurb }}</p>
+          <a href="{{ active.href }}" style="display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;background:var(--teal-deep);color:var(--warm-white);padding:12px 22px;border-radius:100px" style-hover="background:#5E8A86">Read the study →</a>
+        </div>
+        <div style="flex:none;width:200px;height:150px;border-radius:12px;background:#E2E6DF;border:1px solid rgba(34,37,43,.12);display:flex;align-items:center;justify-content:center;font-family:'Public Sans',sans-serif;font-size:11px;color:var(--ink-muted);text-align:center;padding:16px">study<br>preview</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FURTHER EXAMPLES — MASONRY ============ -->
+<section id="sec-examples" data-page-section="Further examples" style="padding:clamp(64px,10vw,120px) 24px clamp(84px,12vw,140px);display:flex;justify-content:center">
+  <div style="width:100%;max-width:960px">
+    <div data-reveal="" style="opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);text-align:center;margin-bottom:48px">
+      
+      <h2 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(30px,4.4vw,48px);margin:0;color:var(--ink)">Further examples</h2>
+      <p style="color:var(--ink);font-size:15px;margin:14px auto 0;max-width:44ch">Secondhand AI as it shows up in the media. Tap any card.</p>
+    </div>
+    <div style="column-count:3;column-gap:18px">
+      <sc-for list="{{ examples }}" as="e" hint-placeholder-count="9">
+        <button onClick="{{ e.open }}" style="display:block;width:100%;text-align:left;margin:0 0 18px;padding:0;border:1px solid rgba(34,37,43,.12);border-radius:14px;background:var(--card);overflow:hidden;cursor:pointer;break-inside:avoid;box-shadow:0 2px 8px rgba(30,50,80,.05);transition:transform .25s,box-shadow .25s" style-hover="transform:translateY(-3px);box-shadow:0 10px 26px rgba(30,50,80,.13)">
+          <div style="height:{{ e.h }};background:#E2E6DF;display:flex;align-items:center;justify-content:center;font-family:'Public Sans',sans-serif;font-size:10.5px;color:var(--ink-muted)">{{ e.kind }}</div>
+          <div style="padding:14px 16px">
+            <div style="font-family:'Public Sans',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:6px">{{ e.src }}</div>
+            <div style="font-family:'Archivo',sans-serif;font-weight:600;font-size:17px;line-height:1.3;color:var(--ink)">{{ e.title }}</div>
+          </div>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- footer -->
+<footer style="position:relative;z-index:1;text-align:center;padding:clamp(48px,7vw,72px) 24px clamp(64px,9vw,96px);background:var(--warm-white);border-top:1px solid rgba(34,37,43,.1)">
+  <div style="font-family:'Archivo',sans-serif;font-weight:600;font-size:22px;color:var(--ink)">Secondhand AI</div>
+  <p style="font-family:'Public Sans',sans-serif;font-size:11px;color:var(--ink-muted);margin-top:12px">Template · references &amp; credits go here</p>
+</footer>
+
+<!-- ============ MODAL ============ -->
+<div onClick="{{ closeModal }}" style="display:none;display:{{ modalDisplay }};position:fixed;inset:0;z-index:50;background:rgba(34,37,43,.45);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:24px;animation:mfade .22s ease-out">
+    <div onClick="{{ stop }}" role="dialog" aria-modal="true" aria-label="{{ modalItem.title }}" tabindex="-1" ref="{{ modalRef }}" style="width:100%;max-width:600px;max-height:88vh;overflow:auto;background:var(--warm-white);border-radius:18px;box-shadow:0 30px 80px rgba(10,20,35,.4);animation:mpop .32s cubic-bezier(.2,.7,.2,1);outline:none">
+      <div style="height:220px;background:#E2E6DF;display:flex;align-items:center;justify-content:center;font-family:'Public Sans',sans-serif;font-size:12px;color:var(--ink-muted);position:relative">
+        <button onClick="{{ closeModal }}" aria-label="Close" style="position:absolute;top:14px;right:14px;width:40px;height:40px;border-radius:50%;border:none;background:rgba(34,37,43,.1);cursor:pointer;font-size:16px;color:var(--ink)">✕</button>
+        {{ modalItem.kind }}
+      </div>
+      <div style="padding:32px 36px 40px">
+        <div style="font-family:'Public Sans',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:10px">{{ modalItem.src }}</div>
+        <h3 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:28px;line-height:1.1;letter-spacing:-.02em;margin:0 0 18px;color:var(--ink)">{{ modalItem.title }}</h3>
+        <p style="font-size:15.5px;line-height:1.65;color:var(--ink-2);margin:0 0 24px">A short description of the example goes here — what happened, who was involved, and where it appeared.</p>
+        <div style="padding:20px 22px;background:#C4D6D2;border:1px solid rgba(62,102,99,.35);border-radius:12px">
+          <div style="font-family:'Public Sans',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:8px">How it shows secondhand AI</div>
+          <p style="font-size:15px;line-height:1.6;color:var(--ink);margin:0">The mechanism — which of the three modes is at play, and who is affected without ever using AI themselves.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { defOpen:false, activeTab:0, modal:null, pageActive:'Intro' };
+
+  constructor(props){
+    super(props);
+    this.bgRef = React.createRef();
+    this.netRef = React.createRef();
+    this.modalRef = React.createRef();
+
+    const mkScene = ()=>({
+      ai: React.createRef(), line: React.createRef(), artifact: React.createRef(),
+      fan: [React.createRef(), React.createRef(), React.createRef()],
+      chip: [React.createRef(), React.createRef(), React.createRef()],
+    });
+    this.sceneGen = mkScene();
+    this.scene1 = mkScene();
+    this.scene2 = mkScene();
+    this.scene3 = mkScene();
+    this.scene3.tintAlice = React.createRef();
+    this.scene3.tintBob = React.createRef();
+    this.anecGenRef = React.createRef();
+    this.modesOuterRef = React.createRef();
+    this.modesStripRef = React.createRef();
+    this.panel1Ref = React.createRef();
+    this.panel2Ref = React.createRef();
+    this.panel3Ref = React.createRef();
+    this._ticking = false;
+    this._steps = {gen:-1, 1:-1, 2:-1, 3:-1};
+  }
+
+  closeModalFn(){
+    var op = this._opener;
+    this.setState({modal:null});
+    setTimeout(()=>{ if(op && op.focus) op.focus(); }, 30);
+  }
+  openModalFn(i){
+    this._opener = document.activeElement;
+    this.setState({modal:i});
+    setTimeout(()=>{ if(this.modalRef.current) this.modalRef.current.focus(); }, 30);
+  }
+
+  componentDidMount(){
+    this._reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // modal keyboard support: Escape closes, Tab is trapped inside the dialog
+    this._onKey = (e)=>{
+      if(this.state.modal===null) return;
+      if(e.key==='Escape'){ this.closeModalFn(); return; }
+      if(e.key==='Tab' && this.modalRef.current){
+        var f = this.modalRef.current.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        if(!f.length) return;
+        var first=f[0], last=f[f.length-1];
+        if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+      }
+    };
+    window.addEventListener('keydown', this._onKey);
+    // reveal on scroll — but under reduced-motion, show everything immediately (no scroll-gated fades)
+    if(this._reduced){
+      document.querySelectorAll('[data-reveal]').forEach(el=>{ el.style.opacity='1'; el.style.transform='none'; });
+    } else {
+      this._io = new IntersectionObserver((entries)=>{
+        entries.forEach(en=>{
+          if(en.isIntersecting){
+            en.target.style.opacity='1';
+            en.target.style.transform='none';
+            this._io.unobserve(en.target);
+          }
+        });
+      },{threshold:.18});
+      document.querySelectorAll('[data-reveal]').forEach(el=>this._io.observe(el));
+    }
+
+    this._pageSections = Array.from(document.querySelectorAll('[data-page-section]'));
+
+    // deep-link: scroll to location.hash after the async render settles
+    if(location.hash && location.hash.length > 1){
+      const id = decodeURIComponent(location.hash.slice(1));
+      const jump = (tries)=>{
+        const el = document.getElementById(id);
+        if(el){
+          const y = el.getBoundingClientRect().top + (window.scrollY||window.pageYOffset);
+          window.scrollTo(0, y);
+        } else if(tries > 0){
+          setTimeout(()=>jump(tries-1), 120);
+        }
+      };
+      setTimeout(()=>jump(20), 150);
+    }
+
+    const scope = (ref)=>({
+      texts: ref.current ? Array.from(ref.current.querySelectorAll('[data-anec-step]')) : [],
+      rails: ref.current ? Array.from(ref.current.querySelectorAll('[data-rail]')) : [],
+    });
+    this._scenes = {
+      gen: scope(this.anecGenRef),
+      1: scope(this.panel1Ref),
+      2: scope(this.panel2Ref),
+      3: scope(this.panel3Ref),
+    };
+
+    this._onScroll = ()=>{
+      if(this._ticking) return;
+      this._ticking = true;
+      requestAnimationFrame(()=>{ this._update(); this._ticking=false; });
+    };
+    window.addEventListener('scroll', this._onScroll, {passive:true});
+    window.addEventListener('resize', this._onScroll);
+
+    // people-and-bots web (decorative canvas)
+    try {
+      if(this.netRef.current){
+        this._drawNet();
+        setTimeout(()=>{ this._net=null; this._drawNet(); }, 500);
+        window.addEventListener('load', ()=>{ this._net=null; this._drawNet(); });
+      }
+    } catch(e){ console.error(e); }
+
+    this._update();
+  }
+
+  componentWillUnmount(){
+    window.removeEventListener('scroll', this._onScroll);
+    window.removeEventListener('resize', this._onScroll);
+    if(this._io) this._io.disconnect();
+    if(this._onKey) window.removeEventListener('keydown', this._onKey);
+  }
+
+  _clamp(v,a,b){ return Math.max(a,Math.min(b,v)); }
+
+  _rand(){ this._seed = (this._seed*1103515245 + 12345) & 0x7fffffff; return this._seed / 0x7fffffff; }
+
+  _generateNet(){
+    const w = window.innerWidth;
+    const H = document.documentElement.scrollHeight;
+    this._seed = 987654321;
+    const rnd = ()=> this._rand();
+    const nodes = [];
+    let y = H*0.05;
+    while(y < H*0.97 && nodes.length < 520){
+      const p = this._clamp(y/H, 0, 1);
+      const rowGap = 210 - 140*p;                    // rows tighten (denser) lower down
+      const count = Math.max(2, Math.round(2 + p*7)); // more nodes per row lower down
+      const corridor = 0.32 - 0.28*p;                 // central reading zone kept clear near top, fills lower down
+      for(let k=0;k<count;k++){
+        let x, tries=0;
+        do { x = rnd()*w; tries++; }
+        while (Math.abs(x - w/2) < corridor*w && rnd() > p*0.55 && tries < 6);
+        const ny = y + (rnd()-0.5)*rowGap*0.55;
+        nodes.push({ x:x, y:ny, s:15, type:(rnd()<0.22?'bot':'person'), a:Math.max(0.03, 0.5*(1-p)+0.06) });
+      }
+      y += rowGap;
+    }
+    const lines = [], seen = {}, parent = [], psize = [];
+    for(let i=0;i<nodes.length;i++){ parent[i]=i; psize[i]=1; }
+    const find = (x)=>{ while(parent[x]!==x){ parent[x]=parent[parent[x]]; x=parent[x]; } return x; };
+    for(let i=0;i<nodes.length;i++){
+      const p = this._clamp(nodes[i].y / H, 0, 1);
+      const reach = 190 + 240*p;            // links reach further lower down, so clusters merge into one web
+      const maxConn = 2 + Math.round(p*3);  // ~2 near the top → ~5 near the bottom
+      const near = [];
+      for(let j=0;j<nodes.length;j++){ if(j===i) continue; if(nodes[i].type==='bot' && nodes[j].type==='bot') continue; const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y; const d=dx*dx+dy*dy; if(d < reach*reach) near.push([d,j]); }
+      near.sort((a,b)=>a[0]-b[0]);
+      let added = 0;
+      for(let c=0;c<near.length && added<maxConn;c++){
+        const j = near[c][1]; const key = i<j ? (i+'-'+j) : (j+'-'+i); if(seen[key]) continue;
+        if(nodes[i].type!=='bot' && nodes[j].type!=='bot'){ const ri=find(i), rj=find(j); if(ri!==rj){ if(psize[ri]+psize[rj] > 3) continue; parent[ri]=rj; psize[rj]+=psize[ri]; } }
+        seen[key]=1; lines.push([i,j]); added++;
+      }
+    }
+    this._net = { nodes:nodes, lines:lines };
+    this._netKey = w + 'x' + H;
+  }
+
+  _person(ctx,x,y,s,a){
+    ctx.strokeStyle='rgba(34,37,43,'+a+')'; ctx.fillStyle='rgba(34,37,43,'+a+')'; ctx.lineWidth=1.3;
+    ctx.beginPath(); ctx.arc(x, y - s*0.5, s*0.26, 0, Math.PI*2); ctx.stroke();
+    ctx.beginPath(); ctx.arc(x, y + s*0.18, s*0.5, Math.PI*1.08, Math.PI*1.92, false); ctx.stroke();
+  }
+  _bot(ctx,x,y,s,a){
+    ctx.strokeStyle='rgba(34,37,43,'+a+')'; ctx.fillStyle='rgba(34,37,43,'+a+')'; ctx.lineWidth=1.3; ctx.lineCap='round';
+    const r=s*0.38, rad=2.5;
+    // antenna + bulb
+    ctx.beginPath(); ctx.moveTo(x, y-r); ctx.lineTo(x, y-r-s*0.34); ctx.stroke();
+    ctx.beginPath(); ctx.arc(x, y-r-s*0.34-s*0.09, s*0.09, 0, Math.PI*2); ctx.fill();
+    // side ears
+    ctx.beginPath(); ctx.rect(x-r-s*0.16, y-s*0.14, s*0.16, s*0.28); ctx.stroke();
+    ctx.beginPath(); ctx.rect(x+r, y-s*0.14, s*0.16, s*0.28); ctx.stroke();
+    // head (rounded square)
+    ctx.beginPath();
+    ctx.moveTo(x-r+rad,y-r); ctx.lineTo(x+r-rad,y-r); ctx.quadraticCurveTo(x+r,y-r,x+r,y-r+rad);
+    ctx.lineTo(x+r,y+r-rad); ctx.quadraticCurveTo(x+r,y+r,x+r-rad,y+r);
+    ctx.lineTo(x-r+rad,y+r); ctx.quadraticCurveTo(x-r,y+r,x-r,y+r-rad);
+    ctx.lineTo(x-r,y-r+rad); ctx.quadraticCurveTo(x-r,y-r,x-r+rad,y-r); ctx.closePath(); ctx.stroke();
+    // eyes
+    ctx.beginPath(); ctx.arc(x-r*0.42, y-r*0.12, s*0.075, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(x+r*0.42, y-r*0.12, s*0.075, 0, Math.PI*2); ctx.fill();
+    // mouth
+    ctx.beginPath(); ctx.moveTo(x-r*0.42, y+r*0.45); ctx.lineTo(x+r*0.42, y+r*0.45); ctx.stroke();
+  }
+  _drawNet(){
+    try {
+      const c = this.netRef && this.netRef.current; if(!c) return;
+      const iw = window.innerWidth, ih = window.innerHeight, H = document.documentElement.scrollHeight;
+      if(c.width !== iw || c.height !== ih){ c.width = iw; c.height = ih; }
+      if(!this._netCtx) this._netCtx = c.getContext('2d');
+      if(!this._net || this._netKey !== (iw + 'x' + H)) this._generateNet();
+      const ctx = this._netCtx; if(!ctx || !this._net) return;
+      ctx.clearRect(0,0,iw,ih);
+      const sc = window.scrollY || window.pageYOffset;
+      const nodes = this._net.nodes, lines = this._net.lines;
+      ctx.lineCap = 'round';
+      for(let l=0;l<lines.length;l++){
+        const a = nodes[lines[l][0]], b = nodes[lines[l][1]];
+        const ay = a.y - sc, by = b.y - sc;
+        if((ay<-80 && by<-80) || (ay>ih+80 && by>ih+80)) continue;
+        ctx.strokeStyle='rgba(34,37,43,'+(Math.min(a.a,b.a)*0.55)+')'; ctx.lineWidth=1;
+        ctx.beginPath(); ctx.moveTo(a.x, ay); ctx.lineTo(b.x, by); ctx.stroke();
+      }
+      for(let i=0;i<nodes.length;i++){
+        const n = nodes[i], sy = n.y - sc;
+        if(sy < -30 || sy > ih+30) continue;
+        if(n.type==='bot') this._bot(ctx, n.x, sy, n.s, n.a); else this._person(ctx, n.x, sy, n.s, n.a);
+      }
+    } catch(e){ /* decorative; ignore */ }
+  }
+
+  _update(){
+    const vh = window.innerHeight;
+    this._drawNet();
+
+    // which page section is currently in view (scroll-position based, works for tall pinned sections too)
+    if(this._pageSections && this._pageSections.length){
+      const markerY = vh * 0.35;
+      let current = this._pageSections[0];
+      for(const el of this._pageSections){
+        const top = el.getBoundingClientRect().top;
+        if(top <= markerY) current = el; else break;
+      }
+      const label = current.getAttribute('data-page-section');
+      if(label !== this.state.pageActive) this.setState({pageActive: label});
+    }
+
+    // scrolling gradient background
+    if(this.bgRef.current){
+      const max = document.documentElement.scrollHeight - vh;
+      const p = this._clamp((window.scrollY||window.pageYOffset)/(max||1),0,1);
+      const topA=[233,236,234], topB=[228,210,174];
+      const botA=[228,219,196], botB=[194,90,43];
+      const mix=(a,b)=>a.map((v,i)=>Math.round(v+(b[i]-v)*p)).join(',');
+      this.bgRef.current.style.background=`linear-gradient(160deg,rgb(${mix(topA,topB)}) 0%,rgb(${mix(botA,botB)}) 100%)`;
+    }
+
+    // shared step/rail activation for a given anecdote scene
+    const activateStep = (sceneKey, prog)=>{
+      const scene = this._scenes[sceneKey];
+      const n = scene.texts.length || 4;
+      let step = Math.min(n-1, Math.floor(prog*n));
+      if(step<0) step=0;
+      if(step!==this._steps[sceneKey]){
+        this._steps[sceneKey] = step;
+        scene.texts.forEach((el,i)=> el.style.opacity = i===step ? '1' : '0');
+        scene.rails.forEach((el,i)=> el.style.background = i===step ? 'var(--teal-deep)' : 'rgba(34,37,43,.2)');
+      }
+    };
+    // shared visual application for a scene at a given progress (0..1)
+    const applySceneProgress = (scene, prog)=>{
+      if(scene.ai.current){
+        const aiP = this._clamp((prog-0.02)/0.14,0,1);
+        scene.ai.current.style.opacity = aiP;
+      }
+      if(scene.tintAlice && scene.tintAlice.current){
+        scene.tintAlice.current.style.opacity = this._clamp(prog/0.6,0,1);
+      }
+      if(scene.line.current){
+        const lineP = this._clamp((prog-0.10)/0.18,0,1);
+        scene.line.current.style.transform = `translateX(-50%) scaleY(${lineP})`;
+      }
+      if(scene.artifact.current){
+        const travelP = this._clamp((prog-0.12)/0.20,0,1);
+        const fadeIn = this._clamp((prog-0.10)/0.08,0,1);
+        const fadeOut = this._clamp((prog-0.34)/0.08,0,1);
+        scene.artifact.current.style.top = ((scene===this.sceneGen?58:44)*travelP)+'px';
+        scene.artifact.current.style.opacity = fadeIn*(1-fadeOut);
+      }
+      if(scene.tintBob && scene.tintBob.current){
+        scene.tintBob.current.style.opacity = this._clamp((prog-0.32)/0.28,0,1);
+      }
+
+      const fanRanges = [[0.42,0.22],[0.48,0.22],[0.54,0.22]];
+      scene.fan.forEach((ref,i)=>{
+        if(!ref.current) return;
+        const [start,span] = fanRanges[i];
+        const t = this._clamp((prog-start)/span,0,1);
+        ref.current.style.strokeDashoffset = (100-100*t);
+      });
+      const chipRanges = [[0.60,0.2],[0.66,0.2],[0.72,0.2]];
+      scene.chip.forEach((ref,i)=>{
+        if(!ref.current) return;
+        const [start,span] = chipRanges[i];
+        ref.current.style.opacity = this._clamp((prog-start)/span,0,1);
+      });
+    };
+
+    // general anecdote: driven by its own vertical scroll position
+    if(this.anecGenRef.current){
+      const r = this.anecGenRef.current.getBoundingClientRect();
+      const h = this.anecGenRef.current.offsetHeight;
+      const prog = this._clamp((-r.top)/((h-vh)||1),0,1);
+      applySceneProgress(this.sceneGen, prog);
+      activateStep('gen', prog);
+    }
+
+    // three modes: driven by the horizontal strip's pinned scroll position
+    if(this.modesOuterRef.current && this.modesStripRef.current){
+      const r = this.modesOuterRef.current.getBoundingClientRect();
+      const h = this.modesOuterRef.current.offsetHeight;
+      const overallProg = this._clamp((-r.top)/((h-vh)||1),0,1);
+      const maxX = this.modesStripRef.current.scrollWidth - window.innerWidth;
+      this.modesStripRef.current.style.transform = `translateX(${-overallProg*maxX}px)`;
+
+      const panelProg = (i)=> this._clamp(overallProg*3 - i, 0, 1);
+      applySceneProgress(this.scene1, panelProg(0));
+      activateStep(1, panelProg(0));
+      applySceneProgress(this.scene2, panelProg(1));
+      activateStep(2, panelProg(1));
+      applySceneProgress(this.scene3, panelProg(2));
+      activateStep(3, panelProg(2));
+    }
+  }
+
+  renderVals(){
+    const activeTab = this.state.activeTab;
+    const modal = this.state.modal;
+
+    const anecStepsGen = [
+      {text:'An AI assistant helps Alice draft something — a note, a message, a summary.'},
+      {text:'She reads it over, signs off, and sends it on. After that, AI\u2019s role is invisible.'},
+      {text:'Bob receives it and reads it as Alice\u2019s own words \u2014 with no way to tell how it was made.'},
+      {text:'Neither of them used AI to have this exchange \u2014 yet AI already shaped it, and how Bob reads everyone after.'},
+    ];
+    const anecSteps1 = [
+      {text:'An ambient AI scribe listens to the visit and drafts a clinical note.'},
+      {text:'A treating clinician reads it, signs it, and files it. After that, AI\u2019s role is invisible.'},
+      {text:'A different clinician later opens the chart and reads it as her colleague\u2019s own judgment.'},
+      {text:'From there it reaches everyone who opens the chart next \u2014 more colleagues, and the patient herself, whose note quietly named a medication she was never prescribed.'},
+    ];
+    const anecSteps2 = [
+      {text:'She learns a new topic by asking an AI assistant to explain it, back and forth, until it clicks.'},
+      {text:'Confident now, she explains it fluently to a classmate \u2014 no hesitation, no gaps.'},
+      {text:'He can\u2019t tell if her fluency reflects real understanding, but repeats it anyway.'},
+      {text:'He explains the same idea to his study group. The uncertainty spreads with the explanation, one retelling at a time.'},
+    ];
+    const anecSteps3 = [
+      {text:'Alice drafts a difficult message with an opinionated AI writing assistant.'},
+      {text:'She adopts its framing without noticing \u2014 it starts to feel like her own view.'},
+      {text:'She briefs Bob. His framing shifts too, though neither of them can point to why.'},
+      {text:'Bob repeats it to his own team. The influence is now two steps removed from the AI that started it \u2014 and impossible to trace.'},
+    ];
+
+    const paperData = [
+      {href:'Research - Harm to Learning.dc.html', tab:'Illusion of understanding', venue:'PNAS \u00b7 2025', title:'Generative AI without guardrails can harm learning', authors:'Bastani, Bastani, Sungu, Ge, Kabakc\u0131, Mariman', blurb:'High-school students using GPT-4 scored 48% better during AI-assisted practice \u2014 then 17% worse on unassisted exams. AI as a crutch, not a tutor.'},
+      {href:'Research - Workslop.dc.html', tab:'Workslop', venue:'Harvard Business Review \u00b7 2025', title:'AI-generated \u201cworkslop\u201d is destroying productivity', authors:'Niederhoffer, Kellerman, Lee, Liebscher, Rapuano, Hancock', blurb:'40% of 1,150 US desk workers received low-quality AI work product in the past month. Each instance cost nearly two hours to interpret or repair.'},
+      {href:'Research - Persuasiveness.dc.html', tab:'Persuasion', venue:'Nature Human Behaviour \u00b7 2025', title:'On the conversational persuasiveness of GPT-4', authors:'Salvi, Horta Ribeiro, Gallotti, West', blurb:'GPT-4 changed people\u2019s views as much as human debaters \u2014 and became more persuasive when given information about the listener.'},
+      {href:'Research - Opinionated AI.dc.html', tab:'Opinionated AI', venue:'CHI \u00b7 2023', title:'Co-writing with opinionated language models affects users\u2019 views', authors:'Jakesch, Bhat, Buschek, Zalmanson, Naaman', blurb:'People who wrote with an opinionated AI assistant were more likely to later report holding its view \u2014 their opinion shifted without them noticing.'},
+    ];
+    const papers = paperData.map((p,i)=>({
+      ...p,
+      select: ()=> this.setState({activeTab:i}),
+      tabStyle: (i===activeTab
+        ? 'background:var(--teal-deep);color:var(--warm-white);'
+        : 'background:rgba(94,138,134,.08);color:var(--teal-deep);')
+        + "font-family:'Public Sans',sans-serif;font-weight:600;font-size:13.5px;padding:9px 16px;border:1px solid rgba(34,37,43,.12);border-bottom:none;border-radius:8px 8px 0 0;cursor:pointer;transition:background .2s"
+    }));
+
+    const exData = [
+      {kind:'screenshot',  src:'X / Twitter',    title:'A reply that reads too clean',           h:'150px'},
+      {kind:'article',     src:'News feature',    title:'The email everyone forwards, no one wrote', h:'210px'},
+      {kind:'screenshot',  src:'Reddit',          title:'\u201cIs my doctor\u2019s note AI?\u201d',  h:'130px'},
+      {kind:'photo',       src:'LinkedIn',        title:'A post that sounds like everyone else',  h:'185px'},
+      {kind:'screenshot',  src:'Court filing',    title:'Citations that don\u2019t exist',          h:'150px'},
+      {kind:'article',     src:'Blog',            title:'When the reviewer used AI too',          h:'200px'},
+      {kind:'photo',       src:'Instagram',       title:'A caption in the house voice',           h:'160px'},
+      {kind:'screenshot',  src:'Email',           title:'Two hours to decode one memo',           h:'190px'},
+      {kind:'article',     src:'Op-ed',           title:'Who wrote the words you trusted?',       h:'135px'},
+    ];
+    const examples = exData.map((e,i)=>({ ...e, open: ()=> this.openModalFn(i) }));
+
+    const pageLabels = ['Definition','Example','3 Modes','Relevance','Research','Further examples'];
+    const pageToc = pageLabels.map(label=>{
+      const active = label === this.state.pageActive;
+      return {
+        label,
+        labelOpacity: active ? 1 : 0,
+        dotSize: active ? '8px' : '6px',
+        dotOpacity: active ? 1 : 0.4,
+        goTo: ()=>{
+          const el = document.querySelector('[data-page-section="'+label+'"]');
+          if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+        },
+      };
+    });
+
+    return {
+      bgRef:this.bgRef,
+      netRef:this.netRef,
+      anecGenRef:this.anecGenRef, aiGenRef:this.sceneGen.ai, lineGenRef:this.sceneGen.line, artifactGenRef:this.sceneGen.artifact,
+      modesOuterRef:this.modesOuterRef, modesStripRef:this.modesStripRef,
+      panel1Ref:this.panel1Ref, ai1Ref:this.scene1.ai, line1Ref:this.scene1.line, artifact1Ref:this.scene1.artifact,
+      fan10Ref:this.scene1.fan[0], fan11Ref:this.scene1.fan[1], fan12Ref:this.scene1.fan[2],
+      chip10Ref:this.scene1.chip[0], chip11Ref:this.scene1.chip[1], chip12Ref:this.scene1.chip[2],
+      panel2Ref:this.panel2Ref, ai2Ref:this.scene2.ai, line2Ref:this.scene2.line, artifact2Ref:this.scene2.artifact,
+      fan20Ref:this.scene2.fan[0], fan21Ref:this.scene2.fan[1], fan22Ref:this.scene2.fan[2],
+      chip20Ref:this.scene2.chip[0], chip21Ref:this.scene2.chip[1], chip22Ref:this.scene2.chip[2],
+      panel3Ref:this.panel3Ref, ai3Ref:this.scene3.ai, line3Ref:this.scene3.line, artifact3Ref:this.scene3.artifact,
+      fan30Ref:this.scene3.fan[0], fan31Ref:this.scene3.fan[1], fan32Ref:this.scene3.fan[2],
+      chip30Ref:this.scene3.chip[0], chip31Ref:this.scene3.chip[1], chip32Ref:this.scene3.chip[2],
+      tintAliceRef:this.scene3.tintAlice, tintBobRef:this.scene3.tintBob,
+      defOpen:this.state.defOpen,
+      defDisplay: this.state.defOpen ? 'block' : 'none',
+      defLabel: this.state.defOpen ? 'Hide the definition' : 'Check your definition',
+      toggleDef: ()=> this.setState(s=>({defOpen:!s.defOpen})),
+      anecStepsGen, anecSteps1, anecSteps2, anecSteps3,
+      papers, active: paperData[activeTab],
+      examples,
+      modalOpen: modal!=null,
+      modalDisplay: modal!=null ? 'flex' : 'none',
+      modalItem: modal!=null ? exData[modal] : {},
+      modalRef:this.modalRef,
+      closeModal: ()=> this.closeModalFn(),
+      stop: (ev)=> ev.stopPropagation(),
+      pageToc,
+    };
+  }
+}
+</script>
+</body>
+</html>

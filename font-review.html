@@ -1,0 +1,195 @@
+<title>Secondhand AI — 10 font combinations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&family=Instrument+Serif&family=Libre+Franklin:wght@600;700;800&family=Newsreader:opsz,wght@6..72,600;6..72,700&family=Oswald:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&family=Spectral:wght@600;700;800&family=Zilla+Slab:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ground:#EFF1EF; --panel:#FBFBFA; --ink:#1E211F; --ink-soft:#585C58;
+    --hair:#D7D9D3; --hair-strong:#B9BCB4; --accent:#3E6663;
+    --air:#E9ECEA; --smoke:#22252B; --amber:#C25A2B; --deep-teal:#3E6663;
+    --umber:#3A2E20; --warm-white:#F4EEE2; --pale-dust:#E7DDC8;
+    --sans:'Public Sans',system-ui,sans-serif; --maxw:1180px;
+    --mono:ui-monospace,Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark){ :root{ --ground:#16181A; --panel:#1E2124; --ink:#ECEDEA; --ink-soft:#9CA09A; --hair:#2C3033; --hair-strong:#3D4247; --accent:#7FB0AB; } }
+  :root[data-theme="light"]{ --ground:#EFF1EF; --panel:#FBFBFA; --ink:#1E211F; --ink-soft:#585C58; --hair:#D7D9D3; --hair-strong:#B9BCB4; --accent:#3E6663; }
+  :root[data-theme="dark"]{ --ground:#16181A; --panel:#1E2124; --ink:#ECEDEA; --ink-soft:#9CA09A; --hair:#2C3033; --hair-strong:#3D4247; --accent:#7FB0AB; }
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:clamp(28px,6vw,64px) clamp(16px,4vw,36px)}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 14px}
+  h1.top{font-size:clamp(26px,4.5vw,40px);line-height:1.05;letter-spacing:-.02em;font-weight:800;margin:0 0 14px;text-wrap:balance}
+  .lede{font-size:clamp(15px,1.9vw,18px);color:var(--ink-soft);max-width:68ch;margin:0 0 8px}
+  .lede b{color:var(--ink)}
+  .legend{font-size:13px;color:var(--ink-soft);margin:16px 0 0;padding-top:14px;border-top:1px solid var(--hair)}
+
+  .grid{display:grid;grid-template-columns:1fr;gap:22px;margin-top:26px}
+  @media(min-width:900px){ .grid{grid-template-columns:1fr 1fr} }
+
+  .combo{border:1px solid var(--hair);border-radius:14px;overflow:hidden;background:var(--panel)}
+  .meta{padding:13px 16px;border-bottom:1px solid var(--hair);display:flex;gap:9px;align-items:baseline;flex-wrap:wrap}
+  .meta .n{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+  .meta .name{font-weight:700;font-size:14px;color:var(--ink)}
+  .meta .cat{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--accent);padding:2px 7px;border-radius:100px}
+  .meta .why{font-size:12.5px;color:var(--ink-soft);flex-basis:100%}
+
+  .sample{background:var(--air);padding:22px 22px 0}
+  .s-eyebrow{font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--deep-teal);margin:0 0 12px}
+  .s-wm{font-family:var(--hf);font-weight:700;font-size:clamp(34px,5.2vw,52px);line-height:.98;letter-spacing:-.005em;text-transform:uppercase;color:var(--smoke);margin:0}
+  .s-wm .amber{color:var(--amber)}
+  .s-sub{font-family:var(--sans);font-size:13.5px;color:var(--ink-soft);margin:10px 0 0;max-width:34ch}
+  .s-heading{font-family:var(--hf);font-weight:700;font-size:clamp(20px,2.7vw,27px);line-height:1.12;letter-spacing:-.01em;color:var(--smoke);margin:22px 0 0;text-wrap:balance}
+  .s-body{font-family:var(--sans);font-size:14.5px;line-height:1.6;color:#3B3F3B;margin:9px 0 0;max-width:58ch;text-wrap:pretty}
+  .band{background:var(--umber);margin:20px -22px 0;padding:16px 22px;display:flex;align-items:center;gap:18px}
+  .band .col{min-width:0}
+  .band-eyebrow{font-family:var(--sans);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#E0A05E;margin:0 0 4px}
+  .band-title{font-family:var(--hf);font-weight:700;font-size:16.5px;line-height:1.15;color:var(--warm-white);margin:0}
+  .stat{font-family:var(--hf);font-weight:700;font-size:clamp(30px,4vw,42px);line-height:.9;color:var(--warm-white);margin-left:auto;flex:none}
+  .band-cap{font-family:var(--sans);font-size:11px;line-height:1.4;color:var(--pale-dust);margin:5px 0 0;max-width:26ch}
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="kicker">Secondhand AI · 10 heading fonts · in page context</p>
+    <h1 class="top">Ten font combinations, weighted toward urgency</h1>
+    <p class="lede">Each card renders a real page context — the <b>wordmark</b>, a <b>section heading</b>, <b>body copy</b>, and a <b>research band</b> with a stat — in a candidate heading font. They span four ways type can carry urgency: <b>editorial serif</b> (gravitas), <b>newsroom sans</b> (broadsheet authority), <b>condensed / poster</b> (breaking-news volume), and <b>slab</b> (documentary weight).</p>
+    <p class="legend">Body copy is held to <b>Public Sans</b> in every card so you're comparing the heading font on equal footing. Colours are the final Ambient Haze palette. Numbers 09 (Spectral, current) is included for reference. Fonts load from Google, so give it a second on first open.</p>
+  </header>
+
+  <div class="grid">
+
+    <!-- 1 Fraunces -->
+    <div class="combo">
+      <div class="meta"><span class="n">01</span><span class="name">Fraunces + Public Sans</span><span class="cat">editorial serif</span><span class="why">High-contrast, slightly wonky serif — humane and warm, but with real editorial bite. Urgency through gravitas, not shouting.</span></div>
+      <div class="sample" style="--hf:'Fraunces',serif">
+        <div class="s-eyebrow">An explainer</div>
+        <div class="s-wm">Second<span class="amber">hand</span> AI</div>
+        <div class="s-sub">What one person's use of AI does to everyone downstream.</div>
+        <div class="s-heading">The illusion doesn't stay with the student.</div>
+        <p class="s-body">AI makes content cheap to produce but costly to verify — and the effect reaches people who never touched it.</p>
+        <div class="band"><div class="col"><div class="band-eyebrow">Results</div><div class="band-title">AI "workslop" is destroying productivity</div><div class="band-cap">of desk workers received it last month</div></div><div class="stat">40%</div></div>
+      </div>
+    </div>
+
+    <!-- 2 Newsreader -->
+    <div class="combo">
+      <div class="meta"><span class="n">02</span><span class="name">Newsreader + Public Sans</span><span class="cat">editorial serif</span><span class="why">A literal newspaper serif — measured, serious, credible. Reads like investigative journalism; urgency that stays calm.</span></div>
+      <div class="sample" style="--hf:'Newsreader',serif">
+        <div class="s-eyebrow">An explainer</div>
+        <div class="s-wm">Second<span class="amber">hand</span> AI</div>
+        <div class="s-sub">What one person's use of AI does to everyone downstream.</div>
+        <div class="s-heading">The illusion doesn't stay with the student.</div>
+        <p class="s-body">AI makes content cheap to produce but costly to verify — and the effect reaches people who never touched it.</p>
+        <div class="band"><div class="col"><div class="band-eyebrow">Results</div><div class="band-title">AI "workslop" is destroying productivity</div><div class="band-cap">of desk workers received it last month</div></div><div class="stat">40%</div></div>
+      </div>
+    </div>
+
+    <!-- 3 Libre Franklin -->
+    <div class="combo">
+      <div class="meta"><span class="n">03</span><span class="name">Libre Franklin + Public Sans</span><span class="cat">newsroom sans</span><span class="why">Franklin Gothic lineage — the voice of serious American journalism. Heavy weights give headlines newsroom authority.</span></div>
+      <div class="sample" style="--hf:'Libre Franklin',sans-serif">
+        <div class="s-eyebrow">An explainer</div>
+        <div class="s-wm" style="font-weight:800">Second<span class="amber">hand</span> AI</div>
+        <div class="s-sub">What one person's use of AI does to everyone downstream.</div>
+        <div class="s-heading" style="font-weight:800">The illusion doesn't stay with the student.</div>
+        <p class="s-body">AI makes content cheap to produce but costly to verify — and the effect reaches people who never touched it.</p>
+        <div class="band"><div class="col"><div class="band-eyebrow">Results</div><div class="band-title" style="font-weight:800">AI "workslop" is destroying productivity</div><div class="band-cap">of desk workers received it last month</div></div><div class="stat" style="font-weight:800">40%</div></div>
+      </div>
+    </div>
+
+    <!-- 4 Archivo -->
+    <div class="combo">
+      <div class="meta"><span class="n">04</span><span class="name">Archivo + Public Sans</span><span class="cat">newsroom sans</span><span class="why">A grotesque built for headlines and data — tight, confident, slightly technical. Urgency with a contemporary edge.</span></div>
+      <div class="sample" style="--hf:'Archivo',sans-serif">
+        <div class="s-eyebrow">An explainer</div>
+        <div class="s-wm" style="font-weight:800">Second<span class="amber">hand</span> AI</div>
+        <div class="s-sub">What one person's use of AI does to everyone downstream.</div>
+        <div class="s-heading" style="font-weight:700">The illusion doesn't stay with the student.</div>
+        <p class="s-body">AI makes content cheap to produce but costly to verify — and the effect reaches people who never touched it.</p>
+        <div class="band"><div class="col"><div class="band-eyebrow">Results</div><div class="band-title" style="font-weight:700">AI "workslop" is destroying productivity</div><div class="band-cap">of desk workers received it last month</div></div><div class="stat" style="font-weight:800">40%</div></div>
+      </div>
+    </div>
+
+    <!-- 5 Oswald -->
+    <div class="combo">
+      <div class="meta"><span class="n">05</span><span class="name">Oswald + Public Sans</span><span class="cat">condensed</span><span class="why">Condensed, tall, poster-like — breaking-news energy. The most overtly "urgent" of the sans options; commands attention.</span></div>
+      <div class="sample" style="--hf:'Oswald',sans-serif">
+        <div class="s-eyebrow">An explainer</div>
+        <div class="s-wm" style="font-weight:600;letter-spacing:.01em">Second<span class="amber">hand</span> AI</div>
+        <div class="s-sub">What one person's use of AI does to everyone downstream.</div>
+        <div class="s-heading" style="font-weight:600;letter-spacing:0">The illusion doesn't stay with the student.</div>
+        <p class="s-body">AI makes content cheap to produce but costly to verify — and the effect reaches people who never touched it.</p>
+        <div class="band"><div class="col"><div class="band-eyebrow">Results</div><div class="band-title" style="font-weight:600">AI "workslop" is destroying productivity</div><div class="band-cap">of desk workers received it last month</div></div><div class="stat" style="font-weight:600">40%</div></div>
+      </div>
+    </div>
+
+    <!-- 6 Anton -->
+    <div class="combo">
+      <div class="meta"><span class="n">06</span><span class="name">Anton + Public Sans</span><span class="cat">poster</span><span class="why">Ultra-heavy condensed poster caps — maximum volume. The loudest, most alarming option; use if you want it to shout.</span></div>
+      <div class="sample" style="--hf:'Anton',sans-serif">
+        <div class="s-eyebrow">An explainer</div>
+        <div class="s-wm" style="letter-spacing:.005em">Second<span class="amber">hand</span> AI</div>
+        <div class="s-sub">What one person's use of AI does to everyone downstream.</div>
+        <div class="s-heading" style="text-transform:uppercase;letter-spacing:0">The illusion doesn't stay with the student.</div>
+        <p class="s-body">AI makes content cheap to produce but costly to verify — and the effect reaches people who never touched it.</p>
+        <div class="band"><div class="col"><div class="band-eyebrow">Results</div><div class="band-title" style="text-transform:uppercase">AI "workslop" is destroying productivity</div><div class="band-cap">of desk workers received it last month</div></div><div class="stat">40%</div></div>
+      </div>
+    </div>
+
+    <!-- 7 Bricolage Grotesque -->
+    <div class="combo">
+      <div class="meta"><span class="n">07</span><span class="name">Bricolage Grotesque + Public Sans</span><span class="cat">contemporary</span><span class="why">A modern editorial grotesque with quirks and warmth — distinctive without costume. Feels current and human, with tension.</span></div>
+      <div class="sample" style="--hf:'Bricolage Grotesque',sans-serif">
+        <div class="s-eyebrow">An explainer</div>
+        <div class="s-wm">Second<span class="amber">hand</span> AI</div>
+        <div class="s-sub">What one person's use of AI does to everyone downstream.</div>
+        <div class="s-heading">The illusion doesn't stay with the student.</div>
+        <p class="s-body">AI makes content cheap to produce but costly to verify — and the effect reaches people who never touched it.</p>
+        <div class="band"><div class="col"><div class="band-eyebrow">Results</div><div class="band-title">AI "workslop" is destroying productivity</div><div class="band-cap">of desk workers received it last month</div></div><div class="stat">40%</div></div>
+      </div>
+    </div>
+
+    <!-- 8 Zilla Slab -->
+    <div class="combo">
+      <div class="meta"><span class="n">08</span><span class="name">Zilla Slab + Public Sans</span><span class="cat">slab</span><span class="why">A sturdy slab serif (Mozilla's face) — documentary, typewriter-adjacent weight. Reads as evidence, dossier, on-the-record.</span></div>
+      <div class="sample" style="--hf:'Zilla Slab',serif">
+        <div class="s-eyebrow">An explainer</div>
+        <div class="s-wm">Second<span class="amber">hand</span> AI</div>
+        <div class="s-sub">What one person's use of AI does to everyone downstream.</div>
+        <div class="s-heading">The illusion doesn't stay with the student.</div>
+        <p class="s-body">AI makes content cheap to produce but costly to verify — and the effect reaches people who never touched it.</p>
+        <div class="band"><div class="col"><div class="band-eyebrow">Results</div><div class="band-title">AI "workslop" is destroying productivity</div><div class="band-cap">of desk workers received it last month</div></div><div class="stat">40%</div></div>
+      </div>
+    </div>
+
+    <!-- 9 Spectral (current) -->
+    <div class="combo">
+      <div class="meta"><span class="n">09</span><span class="name">Spectral + Public Sans</span><span class="cat" style="background:var(--ink-soft)">current</span><span class="why">The current pick — calm, literary, screen-first. Reference point: this is the one you felt undersells the urgency.</span></div>
+      <div class="sample" style="--hf:'Spectral',serif">
+        <div class="s-eyebrow">An explainer</div>
+        <div class="s-wm">Second<span class="amber">hand</span> AI</div>
+        <div class="s-sub">What one person's use of AI does to everyone downstream.</div>
+        <div class="s-heading">The illusion doesn't stay with the student.</div>
+        <p class="s-body">AI makes content cheap to produce but costly to verify — and the effect reaches people who never touched it.</p>
+        <div class="band"><div class="col"><div class="band-eyebrow">Results</div><div class="band-title">AI "workslop" is destroying productivity</div><div class="band-cap">of desk workers received it last month</div></div><div class="stat">40%</div></div>
+      </div>
+    </div>
+
+    <!-- 10 Instrument Serif -->
+    <div class="combo">
+      <div class="meta"><span class="n">10</span><span class="name">Instrument Serif + Public Sans</span><span class="cat">editorial serif</span><span class="why">A tall, dramatic high-contrast display serif — elegant and a little theatrical. Urgency through drama and scale.</span></div>
+      <div class="sample" style="--hf:'Instrument Serif',serif">
+        <div class="s-eyebrow">An explainer</div>
+        <div class="s-wm" style="font-weight:400">Second<span class="amber">hand</span> AI</div>
+        <div class="s-sub">What one person's use of AI does to everyone downstream.</div>
+        <div class="s-heading" style="font-weight:400;font-size:clamp(22px,3vw,30px)">The illusion doesn't stay with the student.</div>
+        <p class="s-body">AI makes content cheap to produce but costly to verify — and the effect reaches people who never touched it.</p>
+        <div class="band"><div class="col"><div class="band-eyebrow">Results</div><div class="band-title" style="font-weight:400;font-size:19px">AI "workslop" is destroying productivity</div><div class="band-cap">of desk workers received it last month</div></div><div class="stat" style="font-weight:400">40%</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="legend">Tell me a number (or two to compare) and I'll apply it across all seven pages and update the design docs. If none quite land, say what's missing — more weight, more condensed, warmer, more clinical — and I'll pull a fresh set.</p>
+</div>
