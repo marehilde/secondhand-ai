@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-09T00:00:00.000Z",
+  "title": "Design System: Secondhand AI",
+  "extensions": {
+    "colorMeta": {
+      "clear-air": { "role": "neutral", "displayName": "Clear Air", "canonical": "#E9ECEA", "tonalRamp": ["#232424","#444544","#656665","#838584","#A2A4A2","#BDC0BE","#D7D9D8","#EEF0EF"] },
+      "smoke": { "role": "neutral", "displayName": "Smoke", "canonical": "#22252B", "tonalRamp": ["#21242A","#42454A","#64666A","#838588","#A2A3A6","#BEBFC1","#D8D9DA","#F0F0F0"] },
+      "amber": { "role": "primary", "displayName": "Amber", "canonical": "#C25A2B", "tonalRamp": ["#401E0E","#7B391B","#B65428","#CC754E","#D9977A","#E4B7A3","#EFD4C8","#F9EEE9"] },
+      "teal": { "role": "secondary", "displayName": "Teal", "canonical": "#5E8A86", "tonalRamp": ["#1A2625","#324A48","#4B6E6A","#638E8A","#8AAAA7","#AEC4C2","#CEDCDA","#ECF1F0"] },
+      "deep-teal": { "role": "secondary", "displayName": "Deep Teal", "canonical": "#3E6663", "tonalRamp": ["#182726","#2E4B49","#486E6B","#6D8B89","#91A8A6","#B3C3C2","#D1DBDA","#EDF1F0"] },
+      "teal-on-dark": { "role": "secondary", "displayName": "Teal on Dark", "canonical": "#8FB0AB", "tonalRamp": ["#1E2524","#3A4846","#576A67","#708A86","#8AAAA6","#ACC5C1","#CDDCDA","#EBF1F0"] },
+      "pale-teal": { "role": "secondary", "displayName": "Pale Teal", "canonical": "#C4D6D2", "tonalRamp": ["#212424","#404645","#5F6866","#7C8785","#98A6A3","#B3C3BF","#CDDCD9","#EBF1F0"] },
+      "dust": { "role": "tertiary", "displayName": "Dust", "canonical": "#B79B6E", "tonalRamp": ["#292319","#504430","#766447","#9A825C","#BBA176","#D0BDA0","#E3D8C6","#F4EFE8"] },
+      "pale-dust": { "role": "tertiary", "displayName": "Pale Dust", "canonical": "#E7DDC8", "tonalRamp": ["#252420","#48453E","#6A665C","#8A8478","#AAA393","#C7BFAD","#E2D8C4","#F4EFE6"] },
+      "warm-sand": { "role": "tertiary", "displayName": "Warm Sand", "canonical": "#E4D2AE", "tonalRamp": ["#27231D","#4A4439","#6E6554","#8F846D","#B0A286","#CEBE9E","#E7D8B8","#F6EFE3"] },
+      "warm-white": { "role": "neutral", "displayName": "Warm White", "canonical": "#F4EEE2", "tonalRamp": ["#252422","#464541","#686661","#88847E","#A7A39B","#C4BFB5","#DED8CD","#F5EFE4"] },
+      "cream": { "role": "neutral", "displayName": "Cream", "canonical": "#F5EFE4", "tonalRamp": ["#252422","#464542","#686661","#88847E","#A7A39B","#C4BFB6","#DED8CE","#F5EFE4"] },
+      "umber": { "role": "tertiary", "displayName": "Umber", "canonical": "#3A2E20", "tonalRamp": ["#2C2318","#4E4337","#6E655B","#8B847B","#A8A39C","#C2BFBA","#DBD8D6","#F0F0EF"] },
+      "terracotta": { "role": "tertiary", "displayName": "Terracotta", "canonical": "#7A3A1E", "tonalRamp": ["#3F1E0F","#79391E","#915C45","#A77D6A","#BD9D90","#D1BBB2","#E4D6D1","#F4EFEC"] },
+      "ink-secondary": { "role": "neutral", "displayName": "Ink Secondary", "canonical": "#4A4E4A", "tonalRamp": ["#222422","#424642","#646764","#838583","#A2A4A2","#BEC0BE","#D8D9D8","#EFF0EF"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The \"Secondhand AI\" wordmark only, with the \"hand\" syllable in amber." },
+      "headline": { "displayName": "Headline", "purpose": "Section and study titles." },
+      "title": { "displayName": "Title", "purpose": "Card and list-item titles." },
+      "body-emphasis": { "displayName": "Body Emphasis", "purpose": "Held-thought pull quotes and key findings — one or two per section." },
+      "body": { "displayName": "Body", "purpose": "Standard paragraph copy, ~46–65ch." },
+      "label": { "displayName": "Label", "purpose": "Eyebrows, nav labels, button micro-copy — uppercase, wide tracking." }
+    },
+    "shadows": [
+      { "name": "card-hairline", "value": "border: 1px solid rgba(34,37,43,0.12); background: #FBFBFA", "purpose": "Solid light content card floating over the scroll gradient — no shadow at rest." },
+      { "name": "feature-card", "value": "0 20px 60px rgba(0,0,0,0.25)", "purpose": "The single most important callout per section (e.g. Why it matters)." },
+      { "name": "modal", "value": "0 30px 80px rgba(10,20,35,0.4)", "purpose": "Modal panels only." },
+      { "name": "small-artifact", "value": "0 4px 10px rgba(20,18,50,0.3)", "purpose": "Tiny document icons in the scroll-scene diagrams." }
+    ],
+    "motion": [
+      { "name": "ease-reveal", "value": "cubic-bezier(0.2, 0.7, 0.2, 1)", "purpose": "Scroll-reveal fade/translate-up." },
+      { "name": "gradient-transition", "value": "background .25s linear", "purpose": "The overview background as it hazes clear-air → amber on scroll." },
+      { "name": "duration-hover", "value": "0.2s", "purpose": "Button/card hover transitions." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one solid call-to-action — pill, deep-teal fill, warm-white text.",
+      "html": "<button class=\"ds-btn-primary\">Read the study →</button>",
+      "css": ".ds-btn-primary { background:#3E6663; color:#F4EEE2; font-family:'Public Sans',sans-serif; font-weight:600; font-size:15px; padding:12px 24px; border:none; border-radius:100px; cursor:pointer; transition:background .2s; } .ds-btn-primary:hover { background:#5E8A86; } .ds-btn-primary:focus-visible { outline:2px solid #3E6663; outline-offset:2px; }"
+    },
+    {
+      "name": "Stat Chip",
+      "kind": "chip",
+      "refersTo": "chip-stat",
+      "description": "One-line stat callout — teal on a faint teal fill (on light sections).",
+      "html": "<span class=\"ds-chip\">40% of desk workers received AI-generated \"workslop\" last month.</span>",
+      "css": ".ds-chip { display:inline-block; font-family:'Public Sans',sans-serif; font-size:11px; color:#3E6663; background:rgba(94,138,134,0.10); border:1px solid rgba(62,102,99,0.35); border-radius:100px; padding:6px 16px; }"
+    },
+    {
+      "name": "Solid Content Card",
+      "kind": "card",
+      "refersTo": "card-solid",
+      "description": "A solid light card that floats over the scroll gradient so text stays legible over any part of it.",
+      "html": "<div class=\"ds-card\"><div class=\"ds-card-title\">Content overload</div><p class=\"ds-card-body\">AI makes content cheap to produce, costly for Bob to verify.</p></div>",
+      "css": ".ds-card { background:#FBFBFA; border:1px solid rgba(34,37,43,0.12); border-radius:14px; padding:22px 24px; } .ds-card-title { font-family:'Archivo',sans-serif; font-weight:600; font-size:18px; color:#22252B; margin-bottom:6px; } .ds-card-body { font-family:'Public Sans',sans-serif; font-size:13.5px; line-height:1.5; color:#4A4E4A; margin:0; }"
+    },
+    {
+      "name": "Contents Rail Dot",
+      "kind": "nav",
+      "refersTo": null,
+      "description": "Signature in-page navigation — fixed vertical dot rail in teal; active dot grows and its label fades in.",
+      "html": "<div class=\"ds-rail-item ds-rail-item--active\"><span class=\"ds-rail-label\">Results</span><span class=\"ds-rail-dot\"></span></div>",
+      "css": ".ds-rail-item { display:flex; align-items:center; gap:10px; cursor:pointer; } .ds-rail-label { font-family:'Public Sans',sans-serif; font-size:10.5px; letter-spacing:.05em; color:#8FB0AB; white-space:nowrap; opacity:0; transition:opacity .3s; } .ds-rail-item--active .ds-rail-label { opacity:1; } .ds-rail-dot { border-radius:50%; background:#8FB0AB; width:6px; height:6px; transition:width .3s,height .3s; } .ds-rail-item--active .ds-rail-dot { width:8px; height:8px; }"
+    },
+    {
+      "name": "Research Section Band",
+      "kind": "custom",
+      "refersTo": "section-band-dark",
+      "description": "A full-width flat coloured band, one per part of a study; text sits directly on the colour, no box. Bands cycle dark → neutral → tint, using a per-study trio.",
+      "html": "<section class=\"ds-band\"><div class=\"ds-band-eyebrow\">Results</div><h2 class=\"ds-band-h\">What they found</h2></section>",
+      "css": ".ds-band { background:#3A2E20; color:#F4EEE2; padding:26px 24px; text-align:center; } .ds-band-eyebrow { font-family:'Public Sans',sans-serif; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#C9A06A; margin-bottom:8px; } .ds-band-h { font-family:'Archivo',sans-serif; font-weight:700; font-size:clamp(26px,3.6vw,38px); margin:0; color:#F4EEE2; }"
+    },
+    {
+      "name": "Modal Panel",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Warm-white modal with a dark blurred backdrop and the system's deepest shadow.",
+      "html": "<div class=\"ds-modal-backdrop\"><div class=\"ds-modal\"><button class=\"ds-modal-close\" aria-label=\"Close\">&#10005;</button><div class=\"ds-modal-body\"><h3 class=\"ds-modal-title\">A reply that reads too clean</h3><p class=\"ds-modal-text\">A short description of the example goes here.</p></div></div></div>",
+      "css": ".ds-modal-backdrop { position:fixed; inset:0; background:rgba(34,37,43,0.45); backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; padding:24px; } .ds-modal { position:relative; width:100%; max-width:600px; background:#F4EEE2; border-radius:18px; box-shadow:0 30px 80px rgba(10,20,35,0.4); } .ds-modal-close { position:absolute; top:14px; right:14px; width:34px; height:34px; border-radius:50%; border:none; background:rgba(34,37,43,0.1); cursor:pointer; font-size:16px; color:#22252B; } .ds-modal-body { padding:32px 36px 40px; } .ds-modal-title { font-family:'Archivo',sans-serif; font-weight:700; font-size:28px; letter-spacing:-.02em; margin:0 0 18px; color:#22252B; } .ds-modal-text { font-size:15.5px; line-height:1.65; color:#4A4E4A; margin:0; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Ambient Haze",
+    "overview": "The whole system reads as clean, breathable air that a warm haze gradually creeps across — you only notice it when it thickens. The neutral clear-air ground is the default; amber is the heat that builds (urgency that accumulates rather than shouts); teal is the quiet recurring accent that carries the beneficial side of the story; dust is the softer warm haze that ties the pages together. This serves the argument: secondhand AI is two-sided, its effects are invisible and hard to spot, and it carries an urgency felt more than announced. The signature moment is the overview's scroll gradient: the background hazes clear-air → amber as the reader descends. Elsewhere the same logic is flat coloured section bands (research) or a single quiet ground with colour carried in the type (index, examples). It rejects the SaaS landing page, the paper-as-webpage look, and AI-panic clickbait.",
+    "keyCharacteristics": [
+      "Clear-air neutral is the default ground; colour is used sparingly and deliberately",
+      "Amber = heat/urgency, dust = softer warm haze, plus teal as the single recurring accent on every page",
+      "The overview's live scroll gradient hazes clear-air → amber as you descend",
+      "Research pages are flat coloured section bands built from exactly three colours",
+      "Wave-shaped dividers stitch the coloured bands; surfaces are kept clean of decorative line art"
+    ],
+    "rules": [
+      { "name": "The One Teal Rule", "body": "Teal is the only accent on every page; it carries links, navigation, and the beneficial side of the two-sided story.", "section": "colors" },
+      { "name": "The Amber-Is-Heat Rule", "body": "Amber means urgency, heat, or the harm side — never decoration. Keep it rare so it still reads as heat.", "section": "colors" },
+      { "name": "The Quiet-Ground Rule", "body": "Clear air is the default. Colour is added deliberately, never wall-to-wall.", "section": "colors" },
+      { "name": "The Flat-Band Rule", "body": "Section backgrounds are flat and never carry a shadow; anything lifted is a solid light card on top.", "section": "elevation" },
+      { "name": "The Legible-Card Rule", "body": "Any content card over the amber-transitioning gradient must be a solid light surface with dark text, never a translucent tint.", "section": "elevation" },
+      { "name": "The Title-Owns-the-Fold Rule", "body": "Abril Fatface is the wordmark alone; Archivo carries all headings; Public Sans carries everything else. The title commands attention only because the display face stays rare and the supporting fonts stay quiet.", "section": "typography" }
+    ],
+    "dos": [
+      "Do keep clear air as the default ground and add colour deliberately.",
+      "Do keep teal as the one accent on every page, carrying links, nav, and the beneficial side.",
+      "Do use amber only for heat, urgency, or the harm side — and keep it rare.",
+      "Do build research pages as flat coloured bands from exactly three colours in the fixed order.",
+      "Do run the overview background as a clear-air → amber scroll gradient with content on solid light cards.",
+      "Do give every non-index page a \"← Back to index\" link and a prefers-reduced-motion fallback."
+    ],
+    "donts": [
+      "Don't introduce a generic SaaS landing-page look — no hero-metric tiles, gradient text, per-section eyebrows, or identical card grids.",
+      "Don't let the site read like an academic PDF — stage research as coloured bands and designed scenes.",
+      "Don't tip into AI-panic clickbait — there is no red alarm; amber is warmth that rises, not danger.",
+      "Don't put dark text on amber sections or light-grey text on light grounds.",
+      "Don't use more than three band colours on a single research page.",
+      "Don't use Abril Fatface for anything but the wordmark, add a fourth family, or use numbered markers as decoration. The system is Abril Fatface (wordmark) + Archivo (headings) + Public Sans (everything else)."
+    ]
+  }
+}

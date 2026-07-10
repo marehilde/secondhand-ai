@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(& \"C:\\\\Program Files\\\\nodejs\\\\node.exe\" \"C:\\\\Users\\\\Mare de Wit\\\\.claude\\\\skills\\\\impeccable\\\\scripts\\\\critique-storage.mjs\" trend color-scheme 5)",
+      "Skill(artifact-design)",
+      "Skill(artifact-design:*)",
+      "PowerShell(Remove-Item \".\\\\palette-review.html\" -Force; \"deleted palette-review.html: \" + \\(-not \\(Test-Path \".\\\\palette-review.html\"\\)\\))"
+    ]
+  }
+}
