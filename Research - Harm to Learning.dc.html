@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Archivo:wght@400;500;600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0}
+body{color:#22252B;font-family:'Public Sans',system-ui,sans-serif;line-height:1.6}
+a{text-decoration:none}
+.backlink{position:fixed;top:22px;left:24px;z-index:20;font-family:'Public Sans',system-ui,sans-serif;font-size:11px;letter-spacing:.06em;color:#F4EEE2;background:rgba(34,37,43,.5);padding:8px 14px;border-radius:100px;backdrop-filter:blur(4px);text-decoration:none}
+.backlink:hover{color:#F4EEE2;background:rgba(34,37,43,.62)}
+h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}body{font-kerning:normal}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}html{scroll-behavior:auto}}
+</style>
+</helmet>
+
+<a href="Landing.dc.html" class="backlink">← Back to index</a>
+
+<!-- contents rail -->
+<div style="position:fixed;top:50%;right:26px;transform:translateY(-50%);z-index:20;display:flex;flex-direction:column;gap:14px;align-items:flex-end">
+  <sc-for list="{{ toc }}" as="t" hint-placeholder-count="6">
+    <button type="button" onClick="{{ t.goTo }}" aria-label="{{ t.label }}" style="display:flex;align-items:center;gap:10px;cursor:pointer;opacity:{{ t.opacity }};transition:opacity .3s;background:none;border:none;padding:6px 2px;font:inherit;color:inherit">
+      <span style="font-family:'Public Sans',sans-serif;font-size:10.5px;letter-spacing:.05em;color:#8FB0AB;white-space:nowrap;transition:opacity .3s;opacity:{{ t.labelOpacity }}">{{ t.label }}</span>
+      <span style="width:{{ t.dotSize }};height:{{ t.dotSize }};border-radius:50%;background:#8FB0AB;flex:none;transition:width .3s,height .3s"></span>
+    </button>
+  </sc-for>
+</div>
+
+<div style="position:relative">
+
+
+  <!-- ===== 1. TITLE — PURPLE ===== -->
+  <section data-section="Title" style="min-height:80vh;background:#A84A22;display:flex;align-items:center;justify-content:center;padding:clamp(48px,7vw,72px) 24px;position:relative">
+    <div data-reveal style="max-width:720px;text-align:center;position:relative;z-index:1">
+      <div style="font-family:'Public Sans',sans-serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#F4EEE2;margin-bottom:26px">Research · PNAS 2025</div>
+      <h1 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(30px,5vw,56px);line-height:1.1;letter-spacing:-.01em;margin:0;color:#F4EEE2">Generative AI without guardrails can harm learning</h1>
+      <p style="font-size:16px;color:#F4EEE2;margin:16px 0 0">Bastani · Bastani · Sungu · Ge · Kabakcı · Mariman</p>
+      <p style="font-family:'Public Sans',sans-serif;font-size:12px;color:#F4EEE2;margin:6px 0 0">Proceedings of the National Academy of Sciences, 122(26)</p>
+      <div style="display:flex;gap:12px;justify-content:center;margin-top:22px;flex-wrap:wrap">
+        <a href="#" style="font-weight:600;font-size:14px;background:#3E6663;color:#F4EEE2;padding:12px 24px;border-radius:100px" style-hover="background:#5E8A86">Read the full paper →</a>
+        <a href="#" style="font-weight:600;font-size:14px;color:#F4EEE2;background:rgba(244,238,226,.12);border:1px solid rgba(244,238,226,.4);padding:12px 24px;border-radius:100px">PDF</a>
+      </div>
+    </div>  </section>
+
+  <!-- ===== 2. SUMMARY / AIM / HYPOTHESIS — BLUE ===== -->
+  <section data-section="Summary" style="min-height:80vh;background:#FBF4F0;display:flex;align-items:center;justify-content:center;padding:clamp(48px,7vw,72px) 24px;position:relative">
+    <div data-reveal style="max-width:640px;text-align:center;position:relative;z-index:1">
+      <p style="font-family:'Public Sans',system-ui,sans-serif;font-weight:500;font-size:clamp(21px,2.8vw,29px);line-height:1.5;color:#22252B;margin:0 0 18px">High-school students using GPT-4 without guardrails scored higher in the moment — and worse once the AI was taken away. An early demonstration of the "illusion of understanding" that later becomes someone else's secondhand AI problem.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;text-align:left">
+        <div style="background:#FBFBFA;border:1px solid rgba(34,37,43,.12);border-radius:14px;padding:18px 20px">
+          <div style="font-family:'Public Sans',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#4A4E4A;margin-bottom:8px">Aim</div>
+          <p style="margin:0;font-size:15px;line-height:1.5;color:#22252B">Test whether unrestricted GPT-4 access changes how much high-school students actually learn in a math course — not just how they perform while using it.</p>
+        </div>
+        <div style="background:#FBFBFA;border:1px solid rgba(34,37,43,.12);border-radius:14px;padding:18px 20px">
+          <div style="font-family:'Public Sans',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#4A4E4A;margin-bottom:8px">Hypothesis</div>
+          <p style="margin:0;font-size:15px;line-height:1.5;color:#22252B">Students will lean on GPT-4 as a "crutch" rather than a tutor — raising in-the-moment performance while masking, or worsening, actual skill acquisition.</p>
+        </div>
+      </div>
+    </div>  </section>
+
+  <!-- ===== 3. PROCEDURE — BEIGE, connected by lines ===== -->
+  <section data-section="Procedure" style="min-height:80vh;background:#F0E9D9;display:flex;align-items:center;justify-content:center;padding:clamp(48px,7vw,72px) 24px;position:relative">
+    <div data-reveal style="max-width:520px;width:100%;position:relative;z-index:1">
+      <div style="text-align:center;margin-bottom:22px">        <h2 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,38px);margin:0;color:#22252B">Procedure</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center">
+        <sc-for list="{{ steps }}" as="st" hint-placeholder-count="3">
+          <div style="display:flex;flex-direction:column;align-items:center;width:100%">
+            <div style="width:100%;max-width:420px;background:#FBFBFA;border:1px solid rgba(34,37,43,.12);border-radius:12px;padding:15px 22px;box-shadow:0 4px 14px rgba(34,37,43,.08)">
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:5px">
+                <div style="flex:none;width:26px;height:26px;border-radius:50%;background:#22252B;color:#F4EEE2;display:flex;align-items:center;justify-content:center;font-family:'Public Sans',sans-serif;font-size:12px">{{ st.n }}</div>
+                <div style="font-family:'Public Sans',system-ui,sans-serif;font-weight:600;font-size:16px;color:#22252B">{{ st.title }}</div>
+              </div>
+              <p style="margin:0;font-size:13px;line-height:1.5;color:#4A4E4A">{{ st.body }}</p>
+            </div>
+            <div style="display:none;display:{{ st.connDisplay }};width:2px;height:14px;background:repeating-linear-gradient(to bottom,#8FB0AB 0 4px,transparent 4px 9px)"></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>  </section>
+
+  <!-- ===== 4. RESULTS — PURPLE, text only ===== -->
+  <section data-section="Results" style="min-height:80vh;background:#FBF4F0;display:flex;align-items:center;justify-content:center;padding:clamp(48px,7vw,72px) 24px;position:relative">
+    <div data-reveal style="max-width:640px;text-align:center;position:relative;z-index:1">      <h2 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,38px);margin:0 0 22px;color:#22252B">Results</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;text-align:left">
+        <div style="background:#FBFBFA;border:1px solid rgba(34,37,43,.12);border-radius:14px;padding:18px">
+          <div style="display:flex;align-items:flex-end;gap:10px;height:52px;margin-bottom:10px">
+            <div data-bar style="flex:1;height:52%;background:rgba(34,37,43,.45);border-radius:4px 4px 0 0"></div>
+            <div data-bar style="flex:1;height:100%;background:#22252B;border-radius:4px 4px 0 0"></div>
+          </div>
+          <div data-num style="font-family:'Public Sans',system-ui,sans-serif;font-weight:700;font-size:30px;color:#22252B;line-height:1">+48%</div>
+          <p style="margin:6px 0 0;font-size:13.5px;line-height:1.5;color:#4A4E4A">Higher scores on practice problems with GPT-4 access than the control group.</p>
+        </div>
+        <div style="background:#FBFBFA;border:1px solid rgba(34,37,43,.12);border-radius:14px;padding:18px">
+          <div style="display:flex;align-items:flex-end;gap:10px;height:52px;margin-bottom:10px">
+            <div data-bar style="flex:1;height:100%;background:#A84A22;border-radius:4px 4px 0 0"></div>
+            <div data-bar style="flex:1;height:78%;background:rgba(168,74,34,.45);border-radius:4px 4px 0 0"></div>
+          </div>
+          <div data-num style="font-family:'Public Sans',system-ui,sans-serif;font-weight:700;font-size:30px;color:#A84A22;line-height:1">−17%</div>
+          <p style="margin:6px 0 0;font-size:13.5px;line-height:1.5;color:#4A4E4A">Lower scores on the unassisted exam once the AI was removed.</p>
+        </div>
+      </div>
+    </div>  </section>
+
+  <!-- ===== 5. KEY FINDINGS — BLUE, big ===== -->
+  <section data-section="Key findings" style="min-height:80vh;background:#F0E9D9;display:flex;align-items:center;justify-content:center;padding:clamp(48px,7vw,72px) 24px;position:relative">
+    <div data-reveal style="max-width:680px;position:relative;z-index:1">
+      <h2 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,38px);margin:0 0 22px;color:#22252B;text-align:center">Key findings</h2>
+      <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px">
+        <li style="display:flex;gap:18px;align-items:baseline">
+          <span style="font-family:'Public Sans',system-ui,sans-serif;font-weight:700;font-size:26px;color:#A84A22">01</span>
+          <span style="font-family:'Public Sans',system-ui,sans-serif;font-weight:500;font-size:clamp(21px,2.6vw,28px);line-height:1.4;color:#22252B">Students with GPT-4 access scored 48% better on practice problems.</span>
+        </li>
+        <li style="display:flex;gap:18px;align-items:baseline">
+          <span style="font-family:'Public Sans',system-ui,sans-serif;font-weight:700;font-size:26px;color:#A84A22">02</span>
+          <span style="font-family:'Public Sans',system-ui,sans-serif;font-weight:500;font-size:clamp(21px,2.6vw,28px);line-height:1.4;color:#22252B">The same students scored 17% worse on a subsequent unassisted exam.</span>
+        </li>
+        <li style="display:flex;gap:18px;align-items:baseline">
+          <span style="font-family:'Public Sans',system-ui,sans-serif;font-weight:700;font-size:26px;color:#A84A22">03</span>
+          <span style="font-family:'Public Sans',system-ui,sans-serif;font-weight:500;font-size:clamp(21px,2.6vw,28px);line-height:1.4;color:#22252B">Because practice performance was high, students had little reason to suspect their own understanding was shallow.</span>
+        </li>
+      </ul>
+    </div>  </section>
+
+  <!-- ===== 6. IMPLICATIONS — BEIGE, big ===== -->
+  <section data-section="Implications" style="min-height:80vh;background:#A84A22;display:flex;align-items:center;justify-content:center;padding:clamp(48px,7vw,72px) 24px;position:relative">
+    <div data-reveal style="max-width:640px;text-align:center;position:relative;z-index:1">
+      <h2 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,38px);margin:0 0 16px;color:#F4EEE2">Implications</h2>
+      <p style="font-family:'Public Sans',system-ui,sans-serif;font-weight:600;font-size:clamp(26px,3.4vw,36px);line-height:1.4;color:#F4EEE2;margin:0 0 16px">The illusion doesn't stay with the student.</p>
+      <p style="font-size:clamp(16px,2vw,19px);line-height:1.7;color:#F4EEE2;margin:0">A student who believes she understands more than she does will teach that false confidence to the next person — a tutor, a classmate, a colleague — turning a first-order learning problem into a secondhand AI one.</p>
+    </div>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { active: 'Title' };
+
+  componentDidMount(){
+    this._sections = Array.from(document.querySelectorAll('[data-section]'));
+    this._scroller = document.querySelector('div[style*="scroll-snap-type"]');
+    this._io = new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{
+        if(en.isIntersecting && en.intersectionRatio > 0.6){
+          const label = en.target.getAttribute('data-section');
+          if(label !== this.state.active) this.setState({active: label});
+        }
+      });
+    }, { root: this._scroller, threshold: [0.6] });
+    this._sections.forEach(el => this._io.observe(el));
+    // ----- entrance motion (respects reduced-motion) -----
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!reduce){
+      this._reveals = Array.from(document.querySelectorAll('[data-reveal]'));
+      this._reveals.forEach(el=>{ el.style.opacity='0'; el.style.transform='translateY(24px)'; el.style.transition='opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)'; });
+      this._revealIO = new IntersectionObserver((ents)=>{ ents.forEach(en=>{ if(en.isIntersecting){ en.target.style.opacity='1'; en.target.style.transform='none'; this._revealIO.unobserve(en.target); } }); }, { threshold:.18 });
+      this._reveals.forEach(el=>this._revealIO.observe(el));
+
+      this._bars = Array.from(document.querySelectorAll('[data-bar]'));
+      this._bars.forEach(el=>{ el.style.transformOrigin='bottom'; el.style.transform='scaleY(0)'; el.style.transition='transform .85s cubic-bezier(.2,.7,.2,1)'; });
+      this._nums = Array.from(document.querySelectorAll('[data-num]'));
+      this._nums.forEach(el=>{ var t=el.textContent, m=t.match(/\d+(\.\d+)?/); if(m){ el.dataset.final=t; var dec=m[0].indexOf('.')>=0?m[0].split('.')[1].length:0; el.textContent = t.slice(0,m.index)+(0).toFixed(dec)+t.slice(m.index+m[0].length); } });
+      var results = document.querySelector('[data-section="Results"]');
+      if(results){
+        this._figIO = new IntersectionObserver((ents)=>{ ents.forEach(en=>{ if(en.isIntersecting){ this._playFigure(en.target); this._figIO.unobserve(en.target); } }); }, { threshold:.4 });
+        this._figIO.observe(results);
+      }
+    }
+  }
+
+  componentWillUnmount(){
+    if(this._io) this._io.disconnect();
+    if(this._revealIO) this._revealIO.disconnect();
+    if(this._figIO) this._figIO.disconnect();
+  }
+
+  _playFigure(section){
+    section.querySelectorAll('[data-bar]').forEach((b,i)=>{ setTimeout(()=>{ b.style.transform='scaleY(1)'; }, 90*i); });
+    section.querySelectorAll('[data-num]').forEach(el=>{
+      var final = el.dataset.final != null ? el.dataset.final : el.textContent;
+      var m = final.match(/\d+(\.\d+)?/);
+      if(!m){ el.textContent = final; return; }
+      var dec = m[0].indexOf('.')>=0 ? m[0].split('.')[1].length : 0;
+      var target = parseFloat(m[0]);
+      var prefix = final.slice(0,m.index), suffix = final.slice(m.index+m[0].length);
+      var start = performance.now(), dur = 1000;
+      var tick = (now)=>{ var t=Math.min((now-start)/dur,1), e=1-Math.pow(1-t,3); el.textContent = prefix + (target*e).toFixed(dec) + suffix; if(t<1) requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+    });
+  }
+
+  renderVals(){
+    const steps = [
+      {n:'1', title:'Assign classrooms', body:'High-school math classrooms were randomly assigned to unrestricted GPT-4 access or no AI access during practice.', hasNext:true, connDisplay:'block'},
+      {n:'2', title:'Practice with GPT-4', body:'Students in the treatment group could consult GPT-4 freely while working through practice problems.', hasNext:true, connDisplay:'block'},
+      {n:'3', title:'Remove the AI for the exam', body:'All students then took an unassisted exam under the same conditions, with no AI access.', hasNext:false, connDisplay:'none'},
+    ];
+    const labels = ['Title','Summary','Procedure','Results','Key findings','Implications'];
+    const toc = labels.map(label=>{
+      const active = label === this.state.active;
+      return {
+        label,
+        opacity: active ? 1 : 0.45,
+        labelOpacity: active ? 1 : 0,
+        dotSize: active ? '8px' : '6px',
+        goTo: ()=>{
+          const el = document.querySelector('[data-section="'+label+'"]');
+          if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+        },
+      };
+    });
+    return { steps, activeLabel: this.state.active, toc };
+  }
+}
+</script>
+</body>
+</html>
