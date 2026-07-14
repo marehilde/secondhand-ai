@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Archivo:wght@400;500;600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0}
+body{color:#22252B;font-family:'Public Sans',system-ui,sans-serif;line-height:1.6}
+a{text-decoration:none}
+.backlink{position:fixed;top:22px;left:24px;z-index:20;font-family:'Public Sans',system-ui,sans-serif;font-size:14px;letter-spacing:.06em;color:#F5EFE4;background:rgba(34,37,43,.5);padding:8px 14px;border-radius:100px;backdrop-filter:blur(4px);text-decoration:none}
+.backlink:hover{color:#F5EFE4;background:rgba(34,37,43,.62)}
+h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}body{font-kerning:normal}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}html{scroll-behavior:auto}}
+</style>
+</helmet>
+
+<a href="Landing.dc.html" class="backlink">← Back to index</a>
+
+<!-- contents rail -->
+<div style="position:fixed;top:50%;right:26px;transform:translateY(-50%);z-index:20;display:flex;flex-direction:column;gap:14px;align-items:flex-end">
+  <sc-for list="{{ toc }}" as="t" hint-placeholder-count="6">
+    <button type="button" onClick="{{ t.goTo }}" aria-label="{{ t.label }}" style="display:flex;align-items:center;gap:10px;cursor:pointer;opacity:{{ t.opacity }};transition:opacity .3s;background:none;border:none;padding:6px 2px;font:inherit;color:inherit">
+      <span style="font-family:'Public Sans',sans-serif;font-size:13.5px;letter-spacing:.05em;color:#8FB0AB;white-space:nowrap;transition:opacity .3s;opacity:{{ t.labelOpacity }}">{{ t.label }}</span>
+      <span style="width:{{ t.dotSize }};height:{{ t.dotSize }};border-radius:50%;background:#8FB0AB;flex:none;transition:width .3s,height .3s"></span>
+    </button>
+  </sc-for>
+</div>
+
+<div style="position:relative">
+
+
+  <!-- ===== 1. TITLE — PURPLE ===== -->
+  <section data-section="Title" style="min-height:80vh;background:#7A3A1E;display:flex;align-items:center;justify-content:center;padding:clamp(48px,7vw,72px) 24px;position:relative">
+    <div data-reveal style="max-width:720px;text-align:center;position:relative;z-index:1">
+      <div style="font-family:'Public Sans',sans-serif;font-size:13.5px;letter-spacing:.22em;text-transform:uppercase;color:#EEC2A4;margin-bottom:26px">Research · Harvard Business Review 2025</div>
+      <h1 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(30px,5vw,56px);line-height:1.1;letter-spacing:-.01em;margin:0;color:#F5EFE4">AI-generated “workslop” is destroying productivity</h1>
+      <p style="font-size:17px;color:#E4D2AE;margin:16px 0 0">Niederhoffer · Kellerman · Lee · Liebscher · Rapuano · Hancock</p>
+      <p style="font-family:'Public Sans',sans-serif;font-size:13.5px;color:#EEC2A4;margin:6px 0 0">Harvard Business Review, 2025</p>
+      <div style="display:flex;gap:12px;justify-content:center;margin-top:22px;flex-wrap:wrap">
+        <a href="#" style="font-weight:600;font-size:14px;background:#3E6663;color:#F5EFE4;padding:12px 24px;border-radius:100px" style-hover="background:#5E8A86">Read the full paper →</a>
+        <a href="#" style="font-weight:600;font-size:14px;color:#F5EFE4;background:rgba(244,238,226,.12);border:1px solid rgba(244,238,226,.4);padding:12px 24px;border-radius:100px">PDF</a>
+      </div>
+    </div>  </section>
+
+  <!-- ===== 2. SUMMARY / AIM / HYPOTHESIS — BLUE ===== -->
+  <section data-section="Summary" style="min-height:80vh;background:#F5EFE4;display:flex;align-items:center;justify-content:center;padding:clamp(48px,7vw,72px) 24px;position:relative">
+    <div data-reveal style="max-width:640px;text-align:center;position:relative;z-index:1">
+      <p style="font-family:'Public Sans',system-ui,sans-serif;font-weight:500;font-size:clamp(21px,2.8vw,29px);line-height:1.5;color:#22252B;margin:0 0 18px">When AI makes work cheap to produce, the cost doesn’t disappear — it moves downstream. “Workslop” is AI-generated output that looks finished but isn’t, and the burden of sorting it out lands on whoever receives it.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;text-align:left">
+        <div style="background:#EFE0C4;border:1px solid #DCC49A;border-radius:14px;padding:18px 20px">
+          <div style="font-family:'Public Sans',sans-serif;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:#8A4A24;margin-bottom:8px">Aim</div>
+          <p style="margin:0;font-size:17px;line-height:1.5;color:#22252B">Measure how much low-quality, AI-generated work (“workslop”) knowledge workers receive, and what it costs the people who have to make sense of it.</p>
+        </div>
+        <div style="background:#EFE0C4;border:1px solid #DCC49A;border-radius:14px;padding:18px 20px">
+          <div style="font-family:'Public Sans',sans-serif;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:#8A4A24;margin-bottom:8px">Hypothesis</div>
+          <p style="margin:0;font-size:17px;line-height:1.5;color:#22252B">As AI lowers the cost of producing content, the volume passed downstream grows faster than recipients can verify it — shifting the effort of quality control from sender to receiver.</p>
+        </div>
+      </div>
+    </div>  </section>
+
+  <!-- ===== 3. PROCEDURE — BEIGE, connected by lines ===== -->
+  <section data-section="Procedure" style="min-height:80vh;background:#E4D2AE;display:flex;align-items:center;justify-content:center;padding:clamp(48px,7vw,72px) 24px;position:relative">
+    <div data-reveal style="max-width:520px;width:100%;position:relative;z-index:1">
+      <div style="text-align:center;margin-bottom:22px">        <h2 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,38px);margin:0;color:#22252B">Procedure</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center">
+        <sc-for list="{{ steps }}" as="st" hint-placeholder-count="3">
+          <div style="display:flex;flex-direction:column;align-items:center;width:100%">
+            <div style="width:100%;max-width:420px;background:#F5EFE4;border:1px solid #DCC49A;border-radius:12px;padding:15px 22px;box-shadow:0 4px 14px rgba(80,64,20,.08)">
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:5px">
+                <div style="flex:none;width:26px;height:26px;border-radius:50%;background:#7A3A1E;color:#F5EFE4;display:flex;align-items:center;justify-content:center;font-family:'Public Sans',sans-serif;font-size:13.5px">{{ st.n }}</div>
+                <div style="font-family:'Public Sans',system-ui,sans-serif;font-weight:600;font-size:16px;color:#22252B">{{ st.title }}</div>
+              </div>
+              <p style="margin:0;font-size:17px;line-height:1.5;color:#3A2E1E">{{ st.body }}</p>
+            </div>
+            <div style="display:none;display:{{ st.connDisplay }};width:2px;height:14px;background:repeating-linear-gradient(to bottom,#C08A5E 0 4px,transparent 4px 9px)"></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>  </section>
+
+  <!-- ===== 4. RESULTS — PURPLE, text only ===== -->
+  <section data-section="Results" style="min-height:80vh;background:#F5EFE4;display:flex;align-items:center;justify-content:center;padding:clamp(48px,7vw,72px) 24px;position:relative">
+    <div data-reveal style="max-width:640px;text-align:center;position:relative;z-index:1">      <h2 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,38px);margin:0 0 22px;color:#22252B">Results</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;text-align:left">
+        <div style="background:#EFE0C4;border:1px solid #DCC49A;border-radius:14px;padding:18px">
+          <div style="display:flex;align-items:flex-end;gap:10px;height:52px;margin-bottom:10px">
+            <div data-bar style="flex:1;height:52%;background:rgba(122,58,30,.4);border-radius:4px 4px 0 0"></div>
+            <div data-bar style="flex:1;height:100%;background:#7A3A1E;border-radius:4px 4px 0 0"></div>
+          </div>
+          <div data-num style="font-family:'Public Sans',system-ui,sans-serif;font-weight:700;font-size:30px;color:#22252B;line-height:1">40%</div>
+          <p style="margin:6px 0 0;font-size:17px;line-height:1.5;color:#3A2E1E">of desk workers received AI-generated “workslop” in the past month.</p>
+        </div>
+        <div style="background:#EFE0C4;border:1px solid #DCC49A;border-radius:14px;padding:18px">
+          <div style="display:flex;align-items:flex-end;gap:10px;height:52px;margin-bottom:10px">
+            <div data-bar style="flex:1;height:100%;background:#7A3A1E;border-radius:4px 4px 0 0"></div>
+            <div data-bar style="flex:1;height:78%;background:rgba(122,58,30,.4);border-radius:4px 4px 0 0"></div>
+          </div>
+          <div data-num style="font-family:'Public Sans',system-ui,sans-serif;font-weight:700;font-size:30px;color:#7A3A1E;line-height:1">~2 hrs</div>
+          <p style="margin:6px 0 0;font-size:17px;line-height:1.5;color:#3A2E1E">lost per instance interpreting or repairing it — about $186 per employee each month.</p>
+        </div>
+      </div>
+    </div>  </section>
+
+  <!-- ===== 5. KEY FINDINGS — BLUE, big ===== -->
+  <section data-section="Key findings" style="min-height:80vh;background:#E4D2AE;display:flex;align-items:center;justify-content:center;padding:clamp(48px,7vw,72px) 24px;position:relative">
+    <div data-reveal style="max-width:680px;position:relative;z-index:1">
+      <h2 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,38px);margin:0 0 22px;color:#22252B;text-align:center">Key findings</h2>
+      <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px">
+        <li style="display:flex;gap:18px;align-items:baseline">
+          <span style="font-family:'Public Sans',system-ui,sans-serif;font-weight:700;font-size:26px;color:#8A4A24">01</span>
+          <span style="font-family:'Public Sans',system-ui,sans-serif;font-weight:500;font-size:clamp(21px,2.6vw,28px);line-height:1.4;color:#22252B">40% of 1,150 US desk workers received low-quality AI work product in the previous month.</span>
+        </li>
+        <li style="display:flex;gap:18px;align-items:baseline">
+          <span style="font-family:'Public Sans',system-ui,sans-serif;font-weight:700;font-size:26px;color:#8A4A24">02</span>
+          <span style="font-family:'Public Sans',system-ui,sans-serif;font-weight:500;font-size:clamp(21px,2.6vw,28px);line-height:1.4;color:#22252B">Each instance cost recipients nearly two hours to interpret or repair — roughly $186 per employee per month.</span>
+        </li>
+        <li style="display:flex;gap:18px;align-items:baseline">
+          <span style="font-family:'Public Sans',system-ui,sans-serif;font-weight:700;font-size:26px;color:#8A4A24">03</span>
+          <span style="font-family:'Public Sans',system-ui,sans-serif;font-weight:500;font-size:clamp(21px,2.6vw,28px);line-height:1.4;color:#22252B">42% of recipients went on to view the sender as less trustworthy.</span>
+        </li>
+      </ul>
+    </div>  </section>
+
+  <!-- ===== 6. IMPLICATIONS — BEIGE, big ===== -->
+  <section data-section="Implications" style="min-height:80vh;background:#7A3A1E;display:flex;align-items:center;justify-content:center;padding:clamp(48px,7vw,72px) 24px;position:relative">
+    <div data-reveal style="max-width:640px;text-align:center;position:relative;z-index:1">
+      <h2 style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,38px);margin:0 0 16px;color:#F5EFE4">Implications</h2>
+      <p style="font-family:'Public Sans',system-ui,sans-serif;font-weight:600;font-size:clamp(26px,3.4vw,36px);line-height:1.4;color:#F5EFE4;margin:0 0 16px">The cost of AI use doesn’t stay with the user.</p>
+      <p style="font-size:22px;line-height:1.7;color:#E4D2AE;margin:0">The time Alice saves generating content is time Bob loses reviewing it. As the volume of AI-assisted work climbs, recipients are pushed either to trust it blindly or to adopt AI themselves just to keep up — her AI use quietly compels his.</p>
+    </div>
+  </section>
+
+  <footer style="text-align:center;padding:clamp(48px,7vw,72px) 24px clamp(56px,8vw,84px);background:#F4EEE2;border-top:1px solid rgba(34,37,43,.12);position:relative;z-index:1">
+    <div style="font-family:'Archivo',system-ui,sans-serif;font-weight:600;font-size:22px;color:#22252B">Secondhand AI</div>
+    <p style="font-family:'Public Sans',system-ui,sans-serif;font-size:13.5px;color:#585C58;margin:10px 0 0">The downstream effect of one person's AI use on everyone else.</p>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px 20px;margin-top:20px;font-family:'Public Sans',system-ui,sans-serif;font-size:14px">
+      <span style="display:inline-flex;align-items:center;gap:8px;color:#3E6663"><a href="https://instagram.com/secondhandai_org" target="_blank" rel="noopener" aria-label="Instagram" style="color:#3E6663;display:inline-flex"><svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"></path></svg></a><a href="https://threads.net/@secondhandai_org" target="_blank" rel="noopener" aria-label="Threads" style="color:#3E6663;display:inline-flex"><svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.781 3.631 2.695 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.32.142 1.49.7 2.58 1.761 3.152 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"></path></svg></a><span>@secondhandai_org</span></span>
+      <a href="https://tiktok.com/@secondhandai" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;color:#3E6663;text-decoration:none"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"></path></svg><span>@secondhandai</span></a>
+      <a href="https://x.com/secondhandAI" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;color:#3E6663;text-decoration:none"><svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path></svg><span>@secondhandAI</span></a>
+      <a href="https://bsky.app/profile/secondhandai.bsky.social" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;color:#3E6663;text-decoration:none"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.479 0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"></path></svg><span>@secondhandai.bsky.social</span></a>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { active: 'Title' };
+
+  componentDidMount(){
+    this._sections = Array.from(document.querySelectorAll('[data-section]'));
+    this._scroller = document.querySelector('div[style*="scroll-snap-type"]');
+    this._io = new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{
+        if(en.isIntersecting && en.intersectionRatio > 0.6){
+          const label = en.target.getAttribute('data-section');
+          if(label !== this.state.active) this.setState({active: label});
+        }
+      });
+    }, { root: this._scroller, threshold: [0.6] });
+    this._sections.forEach(el => this._io.observe(el));
+    // ----- entrance motion (respects reduced-motion) -----
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!reduce){
+      this._reveals = Array.from(document.querySelectorAll('[data-reveal]'));
+      this._reveals.forEach(el=>{ el.style.opacity='0'; el.style.transform='translateY(24px)'; el.style.transition='opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)'; });
+      this._revealIO = new IntersectionObserver((ents)=>{ ents.forEach(en=>{ if(en.isIntersecting){ en.target.style.opacity='1'; en.target.style.transform='none'; this._revealIO.unobserve(en.target); } }); }, { threshold:.18 });
+      this._reveals.forEach(el=>this._revealIO.observe(el));
+
+      this._bars = Array.from(document.querySelectorAll('[data-bar]'));
+      this._bars.forEach(el=>{ el.style.transformOrigin='bottom'; el.style.transform='scaleY(0)'; el.style.transition='transform .85s cubic-bezier(.2,.7,.2,1)'; });
+      this._nums = Array.from(document.querySelectorAll('[data-num]'));
+      this._nums.forEach(el=>{ var t=el.textContent, m=t.match(/\d+(\.\d+)?/); if(m){ el.dataset.final=t; var dec=m[0].indexOf('.')>=0?m[0].split('.')[1].length:0; el.textContent = t.slice(0,m.index)+(0).toFixed(dec)+t.slice(m.index+m[0].length); } });
+      var results = document.querySelector('[data-section="Results"]');
+      if(results){
+        this._figIO = new IntersectionObserver((ents)=>{ ents.forEach(en=>{ if(en.isIntersecting){ this._playFigure(en.target); this._figIO.unobserve(en.target); } }); }, { threshold:.4 });
+        this._figIO.observe(results);
+      }
+    }
+  }
+
+  componentWillUnmount(){
+    if(this._io) this._io.disconnect();
+    if(this._revealIO) this._revealIO.disconnect();
+    if(this._figIO) this._figIO.disconnect();
+  }
+
+  _playFigure(section){
+    section.querySelectorAll('[data-bar]').forEach((b,i)=>{ setTimeout(()=>{ b.style.transform='scaleY(1)'; }, 90*i); });
+    section.querySelectorAll('[data-num]').forEach(el=>{
+      var final = el.dataset.final != null ? el.dataset.final : el.textContent;
+      var m = final.match(/\d+(\.\d+)?/);
+      if(!m){ el.textContent = final; return; }
+      var dec = m[0].indexOf('.')>=0 ? m[0].split('.')[1].length : 0;
+      var target = parseFloat(m[0]);
+      var prefix = final.slice(0,m.index), suffix = final.slice(m.index+m[0].length);
+      var start = performance.now(), dur = 1000;
+      var tick = (now)=>{ var t=Math.min((now-start)/dur,1), e=1-Math.pow(1-t,3); el.textContent = prefix + (target*e).toFixed(dec) + suffix; if(t<1) requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+    });
+  }
+
+  renderVals(){
+    const steps = [
+      {n:'1', title:'Survey 1,150 workers', body:'Researchers at Stanford and BetterUp Labs surveyed 1,150 US desk workers about the work they receive from colleagues.', hasNext:true, connDisplay:'block'},
+      {n:'2', title:'Identify workslop', body:'Respondents reported how often, in the past month, they received AI-generated work product that was low-quality or unhelpful.', hasNext:true, connDisplay:'block'},
+      {n:'3', title:'Cost the burden', body:'Each instance was scored for the time it took to interpret or repair, then converted into a monthly productivity cost.', hasNext:false, connDisplay:'none'},
+    ];
+    const labels = ['Title','Summary','Procedure','Results','Key findings','Implications'];
+    const toc = labels.map(label=>{
+      const active = label === this.state.active;
+      return {
+        label,
+        opacity: active ? 1 : 0.45,
+        labelOpacity: active ? 1 : 0,
+        dotSize: active ? '8px' : '6px',
+        goTo: ()=>{
+          const el = document.querySelector('[data-section="'+label+'"]');
+          if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+        },
+      };
+    });
+    return { steps, activeLabel: this.state.active, toc };
+  }
+}
+</script>
+</body>
+</html>
